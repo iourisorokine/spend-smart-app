@@ -3,13 +3,14 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
-import initializeDb from './db';
 import middleware from './middleware';
 import api from './api';
 import config from './config.json';
 import mongoose from 'mongoose';
 
 require("dotenv").config();
+const session = require("express-session");
+const passport = require("passport");
 
 mongoose
   .connect("mongodb://localhost/spend-smart-database", {
@@ -25,10 +26,6 @@ mongoose
   });
 
 const app_name = require("../package.json").name;
-// const debug = require("debug")(
-//   `${app_name}:${path.basename(__filename).split(".")[0]}`
-// );
-
 
 const app = express();
 app.server = http.createServer(app);
@@ -46,17 +43,39 @@ app.use(bodyParser.json({
 }));
 
 // connect to db
-initializeDb( db => {
+// initializeDb( db => {
 
-	// internal middleware
-	app.use(middleware({ config, db }));
+// 	// internal middleware
+// 	app.use(middleware({ config, db }));
 
-	// api router
-	app.use('/api', api({ config, db }));
+// 	// api router
+// 	app.use('/api', api({ config, db }));
 
-	app.server.listen(process.env.PORT || config.port, () => {
-		console.log(`Started on port ${app.server.address().port}`);
-	});
+// 	app.server.listen(process.env.PORT || config.port, () => {
+// 		console.log(`Started on port ${app.server.address().port}`);
+// 	});
+// });
+
+const MongoStore = require("connect-mongo")(session);
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    reserve: false,
+    saveUninitialized: false,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection
+    })
+  })
+);
+
+app.server.listen(process.env.PORT || config.port, () => {
+	console.log(`Started on port ${app.server.address().port}`);
 });
+
+const index = require('./routes/index')
+app.use("/",index);
+
+const authRoutes =require("./routes/auth")
+app.use("/api/auth",authRoutes);
 
 export default app;

@@ -39,6 +39,7 @@ const handleChange=e=>{
 }
 
 const handleSubmit = e => {
+    console.log(userName, password)
     e.preventDefault();
     signup(userName, password).then(data => {
       console.log(data)
@@ -46,8 +47,8 @@ const handleSubmit = e => {
         setMessage(data.message)
       } else {
         //adapt this
-        this.props.setUser(data);
-        this.props.history.push("/");
+        props.setUser(data);
+        props.history.push("/");
       }
     });
   };
@@ -55,7 +56,8 @@ const handleSubmit = e => {
   return (
     <div className="narrow-wrapper">
       <h2>Signup</h2>
-      <FormGroup >
+      <form onSubmit={handleSubmit}>
+        <FormGroup>
         <FormControl>
           <InputLabel htmlFor="username">Username</InputLabel>
           <Input name="username" type="text" onChange={handleChange}/>
@@ -68,7 +70,8 @@ const handleSubmit = e => {
           </FormHelperText>
         </FormControl>
         <Button className={classes.root} type="submit">Signup</Button>
-      </FormGroup>
+        </FormGroup>
+      </form>
     </div>
   );
 };

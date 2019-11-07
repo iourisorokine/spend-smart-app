@@ -4,7 +4,6 @@ import cors from 'cors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import middleware from './middleware';
-import api from './api';
 import config from './config.json';
 import mongoose from 'mongoose';
 
@@ -67,6 +66,9 @@ app.use(
     })
   })
 );
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.server.listen(process.env.PORT || config.port, () => {
 	console.log(`Started on port ${app.server.address().port}`);

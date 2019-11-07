@@ -5,8 +5,9 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 // signup route POST
-router.post("/signup", (req, res, next) => {
+router.post("/signup", (req, res) => {
   const { username, password } = req.body;
+  console.log('this is getting passed:', req.body)
 
   if (!password || password.length < 8) {
     return res
@@ -50,6 +51,7 @@ router.post("/signup", (req, res, next) => {
 
 //login route
 router.post("/login", (req, res) => {
+    console.log('req body:',req.body)
   passport.authenticate("local", (err, user) => {
     if (err) {
       return res.status(500).json({ message: "Error while authenticating" });

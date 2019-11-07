@@ -3,9 +3,10 @@ import './App.css';
 import { Route, Redirect} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 
 const App = props => {
-
 
   return (
     <div className="App">
@@ -18,12 +19,12 @@ const App = props => {
         <Route
           exact
           path="/auth/signup"
-          render={props => <Home/>}
+          render={props => <Signup/>}
         />
         <Route
           exact
           path="/auth/login"
-          render={props => <Home/>}
+          render={props => <Login/>}
         />
     </div>
   );

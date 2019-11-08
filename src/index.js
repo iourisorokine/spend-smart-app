@@ -1,15 +1,16 @@
-import http from 'http';
-import express from 'express';
-import cors from 'cors';
-import morgan from 'morgan';
-import bodyParser from 'body-parser';
-import middleware from './middleware';
-import config from './config.json';
-import mongoose from 'mongoose';
+const http = require("http");
+const cors = require("cors");
+const config = require('./config.json');
+const cookieParser = require("cookie-parser");
+const express = require("express");
+const favicon = require("serve-favicon");
+const mongoose = require("mongoose")
+const bodyParser = require("body-parser");
+const passport = require("passport");
+const logger = require("morgan");
 
 require("dotenv").config();
 const session = require("express-session");
-const passport = require("passport");
 
 mongoose
   .connect("mongodb://localhost/spend-smart-database", {
@@ -30,35 +31,23 @@ const app = express();
 app.server = http.createServer(app);
 
 // logger
-app.use(morgan('dev'));
+app.use(logger("dev"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // 3rd party middleware
 app.use(cors({
 	exposedHeaders: config.corsHeaders
 }));
 
-app.use(bodyParser.json({
-	limit : config.bodyLimit
-}));
-
-// connect to db
-// initializeDb( db => {
-
-// 	// internal middleware
-// 	app.use(middleware({ config, db }));
-
-// 	// api router
-// 	app.use('/api', api({ config, db }));
-
-// 	app.server.listen(process.env.PORT || config.port, () => {
-// 		console.log(`Started on port ${app.server.address().port}`);
-// 	});
-// });
-
 const MongoStore = require("connect-mongo")(session);
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
+    cookie: {
+      maxAge: 24 * 60 * 60
+    },
     reserve: false,
     saveUninitialized: false,
     store: new MongoStore({
@@ -69,6 +58,8 @@ app.use(
 
 app.use(passport.initialize())
 app.use(passport.session())
+
+require("./configs/passport");
 
 app.server.listen(process.env.PORT || config.port, () => {
 	console.log(`Started on port ${app.server.address().port}`);

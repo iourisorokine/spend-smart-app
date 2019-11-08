@@ -24,14 +24,15 @@
       "no-unused-vars": 1
     }
   },
-  "repository": "developit/express-es6-rest-api",
-  "author": "Jason Miller <jason@developit.ca>",
+  "repository": "spend-smart",
+  "author": "Iouri Sorokine",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^3.0.6",
     "body-parser": "^1.13.3",
     "compression": "^1.5.2",
     "connect-mongo": "^3.1.2",
+    "cookie-parser": "^1.4.4",
     "cors": "^2.7.1",
     "dotenv": "^8.2.0",
     "express": "^4.13.3",
@@ -41,7 +42,8 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "react-router-dom": "^5.1.2",
-    "resource-router-middleware": "^0.6.0"
+    "resource-router-middleware": "^0.6.0",
+    "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.9.0",

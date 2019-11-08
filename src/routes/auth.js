@@ -50,8 +50,8 @@ router.post("/signup", (req, res) => {
 });
 
 //login route
-router.post("/login", (req, res) => {
-    console.log('req body:',req.body)
+router.post("/login", (req, res,next) => {
+  console.log('req body:',req.body)
   passport.authenticate("local", (err, user) => {
     if (err) {
       return res.status(500).json({ message: "Error while authenticating" });
@@ -67,7 +67,7 @@ router.post("/login", (req, res) => {
       }
       return res.json(user);
     });
-  })(req, res);
+  })(req, res,next);
 });
 
 // DELETE /api/auth/logout

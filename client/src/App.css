@@ -30,3 +30,11 @@ a{
   max-width: 500px;
   margin: auto;
 }
+
+.black-link{
+  color: black
+}
+
+.black-link:hover{
+  color: #777;
+}

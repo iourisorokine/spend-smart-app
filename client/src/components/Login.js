@@ -30,13 +30,13 @@ const [userName, setUserName]= useState("")
 const [password, setPassword]= useState("")
 const [message, setMessage]= useState("")
 
-const handleChange=e=>{
+const handleChange=(e)=>{
     const {name,value}=e.target;
     if(name==="username") setUserName(value)
     if(name==="password") setPassword(value)
 }
 
-const handleSubmit = e => {
+const handleSubmit = (e) => {
     console.log(userName, password)
     e.preventDefault();
     login(userName, password).then(data => {

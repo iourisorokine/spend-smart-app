@@ -5,12 +5,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-
-/*
-setUser = user => {
-  setSessionUser(user)
-};
-*/
+import CreateBudget from "./components/CreateBudget"
 
 const App = props => {
 
@@ -34,6 +29,11 @@ const App = props => {
           exact
           path="/auth/login"
           render={props => <Login setUser={setUser}{...props}/>}
+        />
+        <Route
+          exact
+          path="/create-budget"
+          render={props => <CreateBudget {...props}/>}
         />
     </div>
   );

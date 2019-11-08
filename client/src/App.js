@@ -14,11 +14,12 @@ setUser = user => {
 
 const App = props => {
 
-  const [user, setUser]= useState("")
+  const [user, setUser]= useState(null)
+  console.log(user)
 
   return (
     <div className="App">
-      <Navbar user={user}/>
+      <Navbar user={user} setUser={setUser}{...props}/>
       <Route
           exact
           path="/"

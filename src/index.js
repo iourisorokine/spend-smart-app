@@ -71,4 +71,10 @@ app.use("/",index);
 const authRoutes =require("./routes/auth")
 app.use("/api/auth",authRoutes);
 
+const budgetRoutes =require("./routes/budget")
+app.use("/api/budget",budgetRoutes);
+
+const spendRoutes =require("./routes/spend")
+app.use("/api/spend",spendRoutes);
+
 export default app;

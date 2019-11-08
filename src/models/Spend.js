@@ -3,10 +3,12 @@ const { Schema, model } = mongoose;
 
 const spendSchema = new Schema({
     name: String,
-    bucket: {
+    amount: Number,
+    category: {
         type: String,
         enum: ["Food", "Accomodation", "Drinks", "Leisure", "Clothes", "Culture", "Transport"]
-      }
+      },
+    budget: { type: Schema.Types.ObjectId, ref: "Budget" }
 })
 
 const Spend=model("Spend", spendSchema);

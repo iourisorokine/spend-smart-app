@@ -5,7 +5,7 @@ const Home = props => {
     return (
         <div>
             <h2>This is home</h2>
-            <p>Hi, {props.user.username}!</p>
+            {props.user&&(<p>Hi, {props.user.username}!</p>)}
         </div>
     )
 }

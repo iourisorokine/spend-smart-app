@@ -34,14 +34,12 @@ const handleChange=e=>{
     const {name,value}=e.target;
     if(name==="username") setUserName(value)
     if(name==="password") setPassword(value)
-    console.log(name, value)
 }
 
 const handleSubmit = e => {
     console.log(userName, password)
     e.preventDefault();
     login(userName, password).then(data => {
-      console.log(data)
       if (data.message) {
         setMessage(data.message)
       } else {

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Budget from "./Budget";
 
 const BudgetsList = props => {
-  const [budgetsData, setBugdetsData] = useState([]);
+  const [budgetsData, setBudgetsData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const getBudgetsData = () => {
@@ -20,17 +21,24 @@ const BudgetsList = props => {
     setLoading(true);
     axios
       .get("/api/budget")
-      .then(budgets => {
-        console.log(budgets.data);
+      .then(response => {
+        console.log(response.data);
+        setBudgetsData(response.data)
         setLoading(false)
     }).catch(err => {
         console.log(err);
       });
   }, []);
 
+  const budgetsToRender=budgetsData.map(el=>{
+      return <Budget key={el._id} budget={el}/>
+  })
+
   return (
     <div>
-      <h2>This is budgetsList</h2>
+    <p>Here are your budgets:</p>
+      {loading&&(<p>loading...</p>)}
+      {budgetsToRender}  
     </div>
   );
 };

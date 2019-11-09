@@ -1,9 +1,10 @@
 import React from 'react'
 
-const Budget = () => {
+const Budget = props => {
     return (
-        <div>
-            <h2>This is a single budget</h2>
+        <div className="budget narrow-wrapper">
+            <h4>{props.budget.name}</h4>
+            <p>{props.budget.description}</p>
         </div>
     )
 }

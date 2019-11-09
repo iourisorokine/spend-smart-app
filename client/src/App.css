@@ -38,3 +38,10 @@ a{
 .black-link:hover{
   color: #777;
 }
+
+.budget{
+  box-shadow: 2px 2px 8px #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 10px;
+}

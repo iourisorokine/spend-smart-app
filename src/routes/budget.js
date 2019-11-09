@@ -7,12 +7,14 @@ const Spend = require("../models/Spend");
 // POST /api/budget
 // create a new `udget` resource
 router.post("/", (req, res) => {
-    const name = req.body.name;
+    console.log(req.body)
     const owner = req.user._id;
-    const participants= req.body.participants
+    const {name,description, participants} = req.body
+    console.log("description: ", description)
   
     Budget.create({
       name,
+      description,
       owner,
       participants
     })

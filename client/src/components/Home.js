@@ -7,7 +7,6 @@ const Home = props => {
     return (
         <div>
             {props.user&&(<p>Hi, {props.user.username}!</p>)}
-            <p>Here are your budgets:</p>
             <Link to="/create-budget">
                 <Button>New Budget</Button>
             </Link>

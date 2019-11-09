@@ -24,29 +24,28 @@ const styles = {
 };
 
 const CreateBudget = props => {
+  const { classes } = props;
+  const [budgetName, setBudgetName] = useState("");
+  const [budgetDescription, setBudgetDescription] = useState("");
 
-    const { classes } = props;
-    const [budgetName, setBudgetName]= useState("")
-    const [budgetDescription, setBudgetDescription]= useState("")
-
-  const handleChange = (e) => {
-    const {name,value}=e.target;
-    if(name==="budgetName") setBudgetName(value)
-    if(name==="budgetDescription") setBudgetDescription(value)
-    console.log(name, value)
+  const handleChange = e => {
+    const { name, value } = e.target;
+    if (name === "budgetName") setBudgetName(value);
+    if (name === "budgetDescription") setBudgetDescription(value);
+    console.log(name, value);
   };
 
-  const handleSubmit = (e) => {
-      e.preventDefault()
-      axios
-      .post("/api/budget",{name:budgetName, description: budgetDescription,})
-      .then((response)=>{
-          //add props.getData
-          console.log('response from server:',response)
+  const handleSubmit = e => {
+    e.preventDefault();
+    axios
+      .post("/api/budget", { name: budgetName, description: budgetDescription })
+      .then(response => {
+        //add props.getData
+        console.log("response from server:", response);
       })
-      .catch(err=>{
-        console.error(err)
-      })
+      .catch(err => {
+        console.error(err);
+      });
   };
 
   return (
@@ -60,14 +59,16 @@ const CreateBudget = props => {
           </FormControl>
           <FormControl>
             <InputLabel htmlFor="budgetDescription">Description:</InputLabel>
-            <Input name="description" type="text" onChange={handleChange} />
+            <Input name="budgetDescription" type="text" onChange={handleChange} />
           </FormControl>
-          <Button className={classes.root} type="submit">
-            Create Budget
-          </Button>
+            <Button className={classes.root} type="submit">
+              Create Budget
+            </Button>
         </FormGroup>
       </form>
-      <Link className="black-link" to="/">Back</Link>
+      <Link className="black-link" to="/">
+        Back
+      </Link>
     </div>
   );
 };

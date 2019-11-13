@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import CreateBudget from "./components/CreateBudget"
+import BudgetDetails from "./components/BudgetDetails"
 
 const App = props => {
 
@@ -34,6 +35,10 @@ const App = props => {
           exact
           path="/create-budget"
           render={props => <CreateBudget {...props}/>}
+        />
+        <Route
+          path="/budget/:id"
+          render={props => <BudgetDetails {...props}/>}
         />
     </div>
   );

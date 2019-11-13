@@ -61,6 +61,15 @@ const Navbar = props => {
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            getContentAnchorEl={null}
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}>

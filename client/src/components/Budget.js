@@ -1,12 +1,16 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Budget = props => {
-    return (
-        <div className="budget narrow-wrapper">
-            <h4>{props.budget.name}</h4>
-            <p>{props.budget.description}</p>
-        </div>
-    )
-}
+  const linkAddress = `/budget/${props.budget._id}`;
+  return (
+    <Link to={linkAddress}>
+      <div className="budget narrow-wrapper">
+        <h4>{props.budget.name}</h4>
+        <p>{props.budget.description}</p>
+      </div>
+    </Link>
+  );
+};
 
-export default Budget
+export default Budget;

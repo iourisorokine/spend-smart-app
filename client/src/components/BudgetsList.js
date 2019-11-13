@@ -6,6 +6,7 @@ const BudgetsList = props => {
   const [budgetsData, setBudgetsData] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // getting the data only, not used for now
   const getBudgetsData = () => {
     axios
       .get("/api/budget")
@@ -17,6 +18,7 @@ const BudgetsList = props => {
       });
   };
 
+  //getting the data on component mounted
   useEffect(() => {
     setLoading(true);
     axios

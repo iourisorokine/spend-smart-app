@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import {
@@ -8,20 +8,8 @@ import {
   Input,
   Button
 } from "@material-ui/core";
+import {styles} from "../styles/GlobalMUIStyles"
 import axios from "axios";
-
-const styles = {
-  root: {
-    background: "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-    border: 0,
-    borderRadius: 3,
-    boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
-    color: "white",
-    height: 48,
-    padding: "0 30px",
-    margin: "20px 0"
-  }
-};
 
 const CreateBudget = props => {
   const { classes } = props;
@@ -61,7 +49,7 @@ const CreateBudget = props => {
             <InputLabel htmlFor="budgetDescription">Description:</InputLabel>
             <Input name="budgetDescription" type="text" onChange={handleChange} />
           </FormControl>
-            <Button className={classes.root} type="submit">
+            <Button className={classes.buttonBlueGrad} type="submit">
               Create Budget
             </Button>
         </FormGroup>

@@ -15,7 +15,7 @@ router.post("/", (req, res) => {
     })
       .then(spend => {
         return Budget.findByIdAndUpdate(budgetId, {
-          $push: { spend: spend._id }
+          $push: { spends: spend._id }
         }).then(() => {
           res.json({
             message: `Spend with id ${spend._id} was successfully added to project with id ${budgetId}`

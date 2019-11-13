@@ -37,8 +37,6 @@ const CreateSpend = props => {
         budgetId: props.budget._id
       })
       .then(response => {
-        console.log("response from server:", response);
-        console.log('getting budget data')
         props.getBudgetData();
       })
       .catch(err => {
@@ -57,7 +55,7 @@ const CreateSpend = props => {
           </FormControl>
           <FormControl>
             <InputLabel htmlFor="spendAmount">Amount:</InputLabel>
-            <Input name="spendAmount" type="number" onChange={handleChange} />
+            <Input name="spendAmount" min="0" step="0.01" type="number" onChange={handleChange} />
           </FormControl>
           <FormControl>
             <InputLabel htmlFor="spendCategory">Category:</InputLabel>
@@ -76,7 +74,7 @@ const CreateSpend = props => {
             </Select>
           </FormControl>
           <Button className={classes.buttonBlueGrad} type="submit">
-            Create Spend
+            Create
           </Button>
         </FormGroup>
       </form>

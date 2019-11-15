@@ -13,7 +13,7 @@ export const styles = {
       backgroundColor: "#21AA44",
       border: 0,
       borderRadius: "50%",
-      boxShadow: "0 3px 5px 2px rgba(33, 203, 243, .3)",
+      boxShadow: "0 3px 5px 2px rgba(100, 240, 130, .3)",
       fontSize: 50,
       paddingBottom:15,
       lineHeight: "10px",

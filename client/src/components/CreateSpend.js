@@ -22,9 +22,15 @@ const CreateSpend = props => {
     const { name, value } = e.target;
     if (name === "spendName") setSpendName(value);
     if (name === "spendAmount") setSpendAmount(value);
-    if (name === "spendCategory") setSpendCategory(value);
     console.log(name, value);
   };
+
+  const selectCategory = e =>{
+    const buttons = Array.from(document.getElementsByClassName('category-option'))
+    buttons.forEach(el=>el.classList.remove('category-option-selected'))
+    e.target.classList.toggle('category-option-selected');
+    setSpendCategory(e.target.innerHTML)
+  }
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -45,7 +51,7 @@ const CreateSpend = props => {
   };
 
   return (
-    <div className="narrow-wrapper">
+    <div className="create-spend narrow-wrapper">
       <h2>Create New Spend</h2>
       <form onSubmit={handleSubmit}>
         <FormGroup>
@@ -55,9 +61,15 @@ const CreateSpend = props => {
           </FormControl>
           <FormControl>
             <InputLabel htmlFor="spendAmount">Amount:</InputLabel>
-            <Input name="spendAmount" min="0" step="0.01" type="number" onChange={handleChange} />
+            <Input
+              name="spendAmount"
+              min="0"
+              step="0.01"
+              type="number"
+              onChange={handleChange}
+            />
           </FormControl>
-          <FormControl>
+          {/* <FormControl>
             <InputLabel htmlFor="spendCategory">Category:</InputLabel>
             <Select
               labelId="spendCategory"
@@ -72,7 +84,16 @@ const CreateSpend = props => {
               <MenuItem value={"Leisure"}>Leisure</MenuItem>
               <MenuItem value={"Drinks"}>Drinks</MenuItem>
             </Select>
-          </FormControl>
+          </FormControl> */}
+          <div className="category-options-container">
+            <div className="category-option" onClick={selectCategory}>Food</div>
+            <div className="category-option" onClick={selectCategory}>Accomodation</div>
+            <div className="category-option" onClick={selectCategory}>Transport</div>
+            <div className="category-option" onClick={selectCategory}>Clothes</div>
+            <div className="category-option" onClick={selectCategory}>Culture</div>
+            <div className="category-option" onClick={selectCategory}>Leisure</div>
+            <div className="category-option" onClick={selectCategory}>Drinks</div>
+          </div>
           <Button className={classes.buttonBlueGrad} type="submit">
             Create
           </Button>

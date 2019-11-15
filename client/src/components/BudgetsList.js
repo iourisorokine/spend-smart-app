@@ -38,7 +38,6 @@ const BudgetsList = props => {
 
   return (
     <div>
-    <p>Here are your budgets:</p>
       {loading&&(<p>loading...</p>)}
       {budgetsToRender}  
     </div>

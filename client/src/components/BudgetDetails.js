@@ -8,8 +8,32 @@ import { styles } from "../styles/GlobalMUIStyles";
 const BudgetDetails = props => {
   const { classes } = props;
   const [budgetData, setBudgetData] = useState(null);
+  const [spendLines, setSpendLines] = useState(null);
+  const [spendTotal, setSpendTotal] = useState(null);
   const [loading, setLoading] = useState(false);
   const [createSpend, setCreateSpend] = useState(false);
+
+  const mapSpendLines = budgetData => {
+    return budgetData.spends.map(el => {
+      return (
+        <div key={el._id} className="spend-line narrow-wrapper">
+          <div className="spend-title">{el.name}</div>
+          <div className="spend-cat">{el.category}</div>
+          <div className="spend-amount">{el.amount} EUR</div>
+        </div>
+      );
+    });
+  };
+
+  const getSpendTotal = budgetData => {
+      const total=budgetData.spends.reduce((acc,val)=>acc+val.amount,0)
+      return (
+        <div className="spend-line narrow-wrapper" key="total">
+          <div className="spend-title"><h3>Total:</h3></div>
+          <div className="spend-total"><h3>{total} EUR</h3></div>
+        </div>
+      );
+  };
 
   // getting the data only
   const getBudgetData = () => {
@@ -17,6 +41,8 @@ const BudgetDetails = props => {
       .get(`/api/budget/${props.match.params.id}`)
       .then(response => {
         setBudgetData(response.data);
+        setSpendLines(mapSpendLines(response.data));
+        setSpendTotal(getSpendTotal(response.data));
       })
       .catch(err => {
         console.log(err);
@@ -30,6 +56,8 @@ const BudgetDetails = props => {
       .get(`/api/budget/${props.match.params.id}`)
       .then(response => {
         setBudgetData(response.data);
+        setSpendLines(mapSpendLines(response.data));
+        setSpendTotal(getSpendTotal(response.data));
         setLoading(false);
       })
       .catch(err => {
@@ -64,17 +92,11 @@ const BudgetDetails = props => {
               </Button>
             </>
           )}
-          {budgetData &&
-            budgetData.spends.map(spend => (
-              <p key={spend._id}>
-                {spend.name} - {spend.category} - {spend.amount}
-              </p>
-            ))}
           {budgetData && (
-            <h3>
-              Total:{" "}
-              {budgetData.spends.reduce((acc, val) => acc + val.amount, 0)}
-            </h3>
+            <>
+              {spendLines}
+              {spendTotal}
+            </>
           )}
         </>
       )}

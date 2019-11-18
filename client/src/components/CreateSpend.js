@@ -25,12 +25,14 @@ const CreateSpend = props => {
     console.log(name, value);
   };
 
-  const selectCategory = e =>{
-    const buttons = Array.from(document.getElementsByClassName('category-option'))
-    buttons.forEach(el=>el.classList.remove('category-option-selected'))
-    e.target.classList.toggle('category-option-selected');
-    setSpendCategory(e.target.innerHTML)
-  }
+  const selectCategory = e => {
+    const buttons = Array.from(
+      document.getElementsByClassName("category-option")
+    );
+    buttons.forEach(el => el.classList.remove("category-option-selected"));
+    e.target.classList.toggle("category-option-selected");
+    setSpendCategory(e.target.innerHTML);
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -51,7 +53,7 @@ const CreateSpend = props => {
   };
 
   return (
-    <div className="create-spend narrow-wrapper">
+    <div className="create-spend">
       <h2>Create New Spend</h2>
       <form onSubmit={handleSubmit}>
         <FormGroup>
@@ -69,34 +71,38 @@ const CreateSpend = props => {
               onChange={handleChange}
             />
           </FormControl>
-          {/* <FormControl>
-            <InputLabel htmlFor="spendCategory">Category:</InputLabel>
-            <Select
-              labelId="spendCategory"
-              name="spendCategory"
-              value={spendCategory}
-              onChange={handleChange}>
-              <MenuItem value={"Food"}>Food</MenuItem>
-              <MenuItem value={"Accomodation"}>Accomodation</MenuItem>
-              <MenuItem value={"Transport"}>Transport</MenuItem>
-              <MenuItem value={"Clothes"}>Clothes</MenuItem>
-              <MenuItem value={"Culture"}>Culture</MenuItem>
-              <MenuItem value={"Leisure"}>Leisure</MenuItem>
-              <MenuItem value={"Drinks"}>Drinks</MenuItem>
-            </Select>
-          </FormControl> */}
           <div className="category-options-container">
-            <div className="category-option" onClick={selectCategory}>Food</div>
-            <div className="category-option" onClick={selectCategory}>Accomodation</div>
-            <div className="category-option" onClick={selectCategory}>Transport</div>
-            <div className="category-option" onClick={selectCategory}>Clothes</div>
-            <div className="category-option" onClick={selectCategory}>Culture</div>
-            <div className="category-option" onClick={selectCategory}>Leisure</div>
-            <div className="category-option" onClick={selectCategory}>Drinks</div>
+            <div className="category-option" onClick={selectCategory}>
+              Food
+            </div>
+            <div className="category-option" onClick={selectCategory}>
+              Accomodation
+            </div>
+            <div className="category-option" onClick={selectCategory}>
+              Transport
+            </div>
+            <div className="category-option" onClick={selectCategory}>
+              Clothes
+            </div>
+            <div className="category-option" onClick={selectCategory}>
+              Culture
+            </div>
+            <div className="category-option" onClick={selectCategory}>
+              Leisure
+            </div>
+            <div className="category-option" onClick={selectCategory}>
+              Drinks
+            </div>
           </div>
           <Button className={classes.buttonBlueGrad} type="submit">
             Create
           </Button>
+          <p
+            onClick={() => props.setCreateSpend(false)}
+            className="black-link"
+            >
+            Cancel
+          </p>
         </FormGroup>
       </form>
     </div>

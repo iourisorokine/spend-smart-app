@@ -32,6 +32,7 @@ a{
 
 .narrow-wrapper{
   max-width: 500px;
+  padding: 0 15px;
   margin: auto;
 }
 
@@ -51,6 +52,10 @@ a{
   margin-top: 10px;
 }
 
+.flex-row{
+  display: flex;
+}
+
 .budget:hover{
   background-color: rgba(100,100,100,0.2)
 }
@@ -62,18 +67,37 @@ a{
 }
 
 .spend-title{
-  flex: 3;
+  flex: 4;
   text-align: left;
 }
 
 .spend-cat{
-  flex: 1;
+  flex: 2;
   text-align: left;
 }
 
 .spend-amount{
-  flex: 1;
+  flex: 2;
   text-align: right;
+}
+
+.spend-edit{
+  flex: 1;
+  margin-left: 10px;
+}
+
+.spend-edit a{
+  color: black;
+}
+
+.spend-edit:hover{
+  transition: ease-in-out;
+  transition-duration: 0.4s;
+  background-color: black;
+}
+
+.spend-edit:hover a{
+  color: white;
 }
 
 .spend-total{
@@ -103,4 +127,24 @@ a{
 .category-option-selected{
   color: white;
   background-color: black;
+}
+
+.btn-budget-container{
+  padding: 20px 30px;
+}
+
+.btn-budget-lines, .btn-budget-graph{
+  padding: 5px 15px;
+  color: #2196F3;
+  border: 2px solid #2196F3;
+}
+
+.btn-budget-lines{
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.btn-budget-graph{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import CreateSpend from "./CreateSpend";
 import axios from "axios";
@@ -16,23 +17,28 @@ const BudgetDetails = props => {
   const mapSpendLines = budgetData => {
     return budgetData.spends.map(el => {
       return (
-        <div key={el._id} className="spend-line narrow-wrapper">
+        <div key={el._id} className="spend-line">
           <div className="spend-title">{el.name}</div>
           <div className="spend-cat">{el.category}</div>
           <div className="spend-amount">{el.amount} EUR</div>
+          <div className="spend-edit"><Link to="#">Edit</Link></div>
         </div>
       );
     });
   };
 
   const getSpendTotal = budgetData => {
-      const total=budgetData.spends.reduce((acc,val)=>acc+val.amount,0)
-      return (
-        <div className="spend-line narrow-wrapper" key="total">
-          <div className="spend-title"><h3>Total:</h3></div>
-          <div className="spend-total"><h3>{total} EUR</h3></div>
+    const total = budgetData.spends.reduce((acc, val) => acc + val.amount, 0);
+    return (
+      <div className="spend-line" key="total">
+        <div className="spend-title">
+          <h3>Total:</h3>
         </div>
-      );
+        <div className="spend-total">
+          <h3>{total} EUR</h3>
+        </div>
+      </div>
+    );
   };
 
   // getting the data only
@@ -66,7 +72,7 @@ const BudgetDetails = props => {
   }, []);
 
   return (
-    <>
+    <div className="narrow-wrapper">
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -84,7 +90,13 @@ const BudgetDetails = props => {
             </>
           ) : (
             <>
-              <h2>{budgetData && budgetData.name} - detail</h2>
+              <div className="flex-row">
+                <h2>{budgetData && budgetData.name} - detail</h2>
+                <div className="flex-row btn-budget-container">
+                  <div className="btn-budget-lines">Lines</div>
+                  <div className="btn-budget-graph">Graph</div>
+                </div>
+              </div>
               <Button
                 className={classes.buttonRoundAdd}
                 onClick={() => setCreateSpend(!createSpend)}>
@@ -93,14 +105,14 @@ const BudgetDetails = props => {
             </>
           )}
           {budgetData && (
-            <>
+            <div>
               {spendLines}
               {spendTotal}
-            </>
+            </div>
           )}
         </>
       )}
-    </>
+    </div>
   );
 };
 

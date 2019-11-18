@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Budget from "./Budget";
+import Button from '@material-ui/core/Button';
+import {Link} from "react-router-dom";
+import { withStyles } from "@material-ui/core/styles";
+import { styles } from "../styles/GlobalMUIStyles";
+
 
 const BudgetsList = props => {
+  const {classes} = props;
   const [budgetsData, setBudgetsData] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -25,23 +31,27 @@ const BudgetsList = props => {
       .get("/api/budget")
       .then(response => {
         console.log(response.data);
-        setBudgetsData(response.data)
-        setLoading(false)
-    }).catch(err => {
+        setBudgetsData(response.data);
+        setLoading(false);
+      })
+      .catch(err => {
         console.log(err);
       });
   }, []);
 
-  const budgetsToRender=budgetsData.map(el=>{
-      return <Budget key={el._id} budget={el}/>
-  })
+  const budgetsToRender = budgetsData.map(el => {
+    return <Budget key={el._id} budget={el} />;
+  });
 
   return (
-    <div>
-      {loading&&(<p>loading...</p>)}
-      {budgetsToRender}  
+    <div className="narrow-wrapper">
+      <Link to="/create-budget">
+        <Button className={classes.buttonRoundAdd}>+</Button>
+      </Link>
+      {loading && <p>loading...</p>}
+      {budgetsToRender}
     </div>
   );
 };
 
-export default BudgetsList;
+export default withStyles(styles)(BudgetsList);

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import CreateSpend from "./CreateSpend";
+import BudgetGraph from "./BudgetGraph"
 import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "../styles/GlobalMUIStyles";
@@ -13,6 +14,7 @@ const BudgetDetails = props => {
   const [spendTotal, setSpendTotal] = useState(null);
   const [loading, setLoading] = useState(false);
   const [createSpend, setCreateSpend] = useState(false);
+  const [budgetView, setBudgetView] = useState("Details");
 
   const mapSpendLines = budgetData => {
     return budgetData.spends.map(el => {
@@ -21,10 +23,24 @@ const BudgetDetails = props => {
           <div className="spend-title">{el.name}</div>
           <div className="spend-cat">{el.category}</div>
           <div className="spend-amount">{el.amount} EUR</div>
-          <div className="spend-edit"><Link to="#">Edit</Link></div>
+          <div className="spend-edit">
+            <Link to="#">Edit</Link>
+          </div>
         </div>
       );
     });
+  };
+
+  const toggleBudgetView = e => {
+    document
+      .getElementsByClassName("btn-budget-lines")[0]
+      .classList.remove("option-selected");
+    document
+      .getElementsByClassName("btn-budget-graph")[0]
+      .classList.remove("option-selected");
+    e.target.classList.add("option-selected");
+    setBudgetView(e.target.innerHTML);
+    console.log(budgetView);
   };
 
   const getSpendTotal = budgetData => {
@@ -93,23 +109,33 @@ const BudgetDetails = props => {
               <div className="flex-row">
                 <h2>{budgetData && budgetData.name} - detail</h2>
                 <div className="flex-row btn-budget-container">
-                  <div className="btn-budget-lines">Lines</div>
-                  <div className="btn-budget-graph">Graph</div>
+                  <div
+                    className="btn-budget-lines option-selected"
+                    onClick={toggleBudgetView}>
+                    Details
+                  </div>
+                  <div className="btn-budget-graph" onClick={toggleBudgetView}>
+                    Graph
+                  </div>
                 </div>
               </div>
+            </>
+          )}
+          {budgetData && budgetView === "Details" && (
+            <div>
               <Button
                 className={classes.buttonRoundAdd}
                 onClick={() => setCreateSpend(!createSpend)}>
                 +
               </Button>
-            </>
-          )}
-          {budgetData && (
-            <div>
               {spendLines}
               {spendTotal}
             </div>
           )}
+          {budgetData && budgetView === "Graph" && (
+              <BudgetGraph/>
+          )}
+          
         </>
       )}
     </div>

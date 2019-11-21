@@ -124,19 +124,14 @@ a{
   margin: 5px;
 }
 
-.category-option-selected{
-  color: white;
-  background-color: black;
-}
-
 .btn-budget-container{
-  padding: 20px 30px;
+  padding: 20px 20px;
 }
 
 .btn-budget-lines, .btn-budget-graph{
   padding: 5px 15px;
-  color: #2196F3;
-  border: 2px solid #2196F3;
+  color: black;
+  border: 2px solid black;
 }
 
 .btn-budget-lines{
@@ -147,4 +142,9 @@ a{
 .btn-budget-graph{
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.option-selected{
+  color: white;
+  background-color: black;
 }

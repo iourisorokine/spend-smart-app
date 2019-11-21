@@ -29,8 +29,8 @@ const CreateSpend = props => {
     const buttons = Array.from(
       document.getElementsByClassName("category-option")
     );
-    buttons.forEach(el => el.classList.remove("category-option-selected"));
-    e.target.classList.toggle("category-option-selected");
+    buttons.forEach(el => el.classList.remove("option-selected"));
+    e.target.classList.toggle("option-selected");
     setSpendCategory(e.target.innerHTML);
   };
 

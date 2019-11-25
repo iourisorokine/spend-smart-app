@@ -22,7 +22,6 @@ const CreateSpend = props => {
     const { name, value } = e.target;
     if (name === "spendName") setSpendName(value);
     if (name === "spendAmount") setSpendAmount(value);
-    console.log(name, value);
   };
 
   const selectCategory = e => {

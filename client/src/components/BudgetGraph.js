@@ -17,9 +17,10 @@ const BudgetGraph = props => {
   const totalSpend = props.data.spends.reduce((acc, val) => acc + val.amount, 0)
   const graphData = {
     datasets: [{
-        data: amountsPerCat
+        data: amountsPerCat,
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#e803b9","#c45800"],
     }],
-    labels: categories
+    labels: categories,
 };
   return (
     <div>

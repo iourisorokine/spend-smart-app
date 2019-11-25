@@ -3,6 +3,7 @@ const { Schema, model } = mongoose;
 
 const spendSchema = new Schema({
     name: String,
+    date: Date,
     amount: Number,
     category: {
         type: String,

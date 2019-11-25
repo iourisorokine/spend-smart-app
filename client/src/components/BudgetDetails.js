@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import SpendLine from "./SpendLine";
 import CreateSpend from "./CreateSpend";
-import BudgetGraph from "./BudgetGraph"
+import BudgetGraph from "./BudgetGraph";
 import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "../styles/GlobalMUIStyles";
@@ -17,17 +18,8 @@ const BudgetDetails = props => {
   const [budgetView, setBudgetView] = useState("Details");
 
   const mapSpendLines = budgetData => {
-    return budgetData.spends.map(el => {
-      return (
-        <div key={el._id} className="spend-line">
-          <div className="spend-title">{el.name}</div>
-          <div className="spend-cat">{el.category}</div>
-          <div className="spend-amount">{el.amount} EUR</div>
-          <div className="spend-edit">
-            <Link to="#">Edit</Link>
-          </div>
-        </div>
-      );
+    return budgetData.spends.map(spend => {
+      return <SpendLine data={spend} />;
     });
   };
 
@@ -132,10 +124,7 @@ const BudgetDetails = props => {
               {spendTotal}
             </div>
           )}
-          {budgetData && budgetView === "Graph" && (
-              <BudgetGraph/>
-          )}
-          
+          {budgetData && budgetView === "Graph" && <BudgetGraph data={budgetData}/>}
         </>
       )}
     </div>

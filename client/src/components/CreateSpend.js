@@ -4,10 +4,9 @@ import {
   FormGroup,
   FormControl,
   InputLabel,
-  MenuItem,
   Input,
   Button,
-  Select
+  TextField
 } from "@material-ui/core";
 import { styles } from "../styles/GlobalMUIStyles";
 import axios from "axios";
@@ -15,6 +14,7 @@ import axios from "axios";
 const CreateSpend = props => {
   const { classes } = props;
   const [spendName, setSpendName] = useState("");
+  const [spendDate, setSpendDate] = useState(new Date());
   const [spendAmount, setSpendAmount] = useState(0);
   const [spendCategory, setSpendCategory] = useState("");
 
@@ -22,6 +22,8 @@ const CreateSpend = props => {
     const { name, value } = e.target;
     if (name === "spendName") setSpendName(value);
     if (name === "spendAmount") setSpendAmount(value);
+    if (name === "spendDate") setSpendDate(value);
+    console.log(name,value)
   };
 
   const selectCategory = e => {
@@ -40,6 +42,7 @@ const CreateSpend = props => {
       .post("/api/spend", {
         name: spendName,
         amount: spendAmount,
+        date: spendDate,
         category: spendCategory,
         budgetId: props.budget._id
       })
@@ -70,6 +73,18 @@ const CreateSpend = props => {
               onChange={handleChange}
             />
           </FormControl>
+          <FormControl>
+            <TextField
+              name="spendDate"
+              label="Date:"
+              type="date"
+              className={classes.textField}
+              onChange={handleChange}
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
+          </FormControl>
           <div className="category-options-container">
             <div className="category-option" onClick={selectCategory}>
               Food
@@ -96,10 +111,7 @@ const CreateSpend = props => {
           <Button className={classes.buttonBlueGrad} type="submit">
             Create
           </Button>
-          <p
-            onClick={() => props.setCreateSpend(false)}
-            className="black-link"
-            >
+          <p onClick={() => props.setCreateSpend(false)} className="black-link">
             Cancel
           </p>
         </FormGroup>

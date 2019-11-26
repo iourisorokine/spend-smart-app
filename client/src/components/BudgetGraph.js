@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Doughnut } from "react-chartjs-2";
 
 const getAmountsPerCat= (cats, data) =>{
@@ -12,6 +12,9 @@ const getAmountsPerCat= (cats, data) =>{
 }
 
 const BudgetGraph = props => {
+
+  const [selectedMonth, setSelectedMonth] = useState(null)
+    
   const categories=["Food", "Accomodation", "Drinks", "Leisure", "Clothes", "Culture", "Transport"];  
   const amountsPerCat = getAmountsPerCat(categories, props.data.spends)
   const totalSpend = props.data.spends.reduce((acc, val) => acc + val.amount, 0)
@@ -22,11 +25,12 @@ const BudgetGraph = props => {
     }],
     labels: categories,
 };
+
   return (
     <div>
       <h4>Your budget by categories:</h4>
       <Doughnut data={graphData} width={300} height={150}></Doughnut>
-      <p>Total Spend: {totalSpend}</p>
+      <p>Total Spend: {totalSpend} EUR</p>
     </div>
   );
 };

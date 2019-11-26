@@ -20,7 +20,6 @@ const CreateBudget = props => {
     const { name, value } = e.target;
     if (name === "budgetName") setBudgetName(value);
     if (name === "budgetDescription") setBudgetDescription(value);
-    console.log(name, value);
   };
 
   const handleSubmit = e => {
@@ -29,7 +28,6 @@ const CreateBudget = props => {
       .post("/api/budget", { name: budgetName, description: budgetDescription })
       .then(response => {
         //add props.getData
-        console.log("response from server:", response);
       })
       .catch(err => {
         console.error(err);

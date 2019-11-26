@@ -5,10 +5,11 @@ const router = express.Router();
 
 //POST request to create a new spend
 router.post("/", (req, res) => {
-    const { name, amount, category, budgetId } = req.body;
+    const { name, date, amount, category, budgetId } = req.body;
   
     Spend.create({
       name,
+      date,
       amount,
       category,
       budget: budgetId

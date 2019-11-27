@@ -32,7 +32,7 @@ const CreateSpend = props => {
     );
     buttons.forEach(el => el.classList.remove("option-selected"));
     e.target.classList.toggle("option-selected");
-    setSpendCategory(e.target.innerHTML);
+    setSpendCategory(e.target.innerText);
   };
 
   const handleSubmit = e => {

@@ -5,10 +5,7 @@ const spendSchema = new Schema({
     name: String,
     date: Date,
     amount: Number,
-    category: {
-        type: String,
-        enum: ["Food", "Accomodation", "Drinks", "Leisure", "Clothes", "Culture", "Transport"]
-      },
+    category: String,
     budget: { type: Schema.Types.ObjectId, ref: "Budget" }
 })
 

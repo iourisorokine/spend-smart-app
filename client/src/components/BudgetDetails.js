@@ -19,7 +19,7 @@ const BudgetDetails = props => {
 
   const mapSpendLines = budgetData => {
     return budgetData.spends.map(spend => {
-      return <SpendLine data={spend} />;
+      return <SpendLine data={spend}/>;
     });
   };
 

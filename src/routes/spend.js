@@ -39,6 +39,20 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:id", (req, res) => {
+  Spend.findById(req.params.id)
+  .then(spend => {
+    if (!spend) {
+      res.status(404).json(spend);
+    } else {
+      res.json(spend);
+    }
+  })
+  .catch(err => {
+    res.json(err);
+  });
+});
+
 // PUT request to update one spend
 router.put("/:id", (req, res) => {
   const spendId = req.params.id;

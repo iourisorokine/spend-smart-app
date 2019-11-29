@@ -5,13 +5,13 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import EditSpend from "./components/EditSpend";
 import CreateBudget from "./components/CreateBudget"
 import BudgetDetails from "./components/BudgetDetails"
 
 const App = props => {
 
   const [user, setUser]= useState(null)
-  console.log(user)
 
   return (
     <div className="App">
@@ -39,6 +39,10 @@ const App = props => {
         <Route
           path="/budget/:id"
           render={props => <BudgetDetails {...props}/>}
+        />
+        <Route
+          path="/spend/:id"
+          render={props => <EditSpend {...props}/>}
         />
     </div>
   );

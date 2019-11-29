@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import {
   FormGroup,
@@ -39,12 +40,11 @@ const EditSpend = props => {
     e.preventDefault();
     props.setCreateSpend(false);
     axios
-      .post("/api/spend", {
+      .put("/api/spend", {
         name: spendName,
         amount: spendAmount,
         date: spendDate,
         category: spendCategory,
-        budgetId: props.budget._id
       })
       .then(response => {
         props.getBudgetData();
@@ -55,8 +55,8 @@ const EditSpend = props => {
   };
 
   return (
-    <div className="create-spend">
-      <h2>Create New Spend</h2>
+    <div className="create-spend narrow-wrapper">
+      <h2>Edit Spend </h2>
       <form onSubmit={handleSubmit}>
         <FormGroup>
           <FormControl>
@@ -109,11 +109,11 @@ const EditSpend = props => {
             </div>
           </div>
           <Button className={classes.buttonBlueGrad} type="submit">
-            Create
+            Save Changes
           </Button>
-          <p onClick={() => props.setCreateSpend(false)} className="black-link">
+          <Link to="/" className="black-link">
             Cancel
-          </p>
+          </Link>
         </FormGroup>
       </form>
     </div>

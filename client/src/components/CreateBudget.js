@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import {
   FormGroup,
   FormControl,
@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import {styles} from "../styles/GlobalMUIStyles"
 import axios from "axios";
+
 
 const CreateBudget = props => {
   const { classes } = props;
@@ -26,8 +27,8 @@ const CreateBudget = props => {
     e.preventDefault();
     axios
       .post("/api/budget", { name: budgetName, description: budgetDescription })
-      .then(response => {
-        //add props.getData
+      .then(() => {
+        props.history.push("/")
       })
       .catch(err => {
         console.error(err);

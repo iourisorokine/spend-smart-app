@@ -19,7 +19,7 @@ const App = props => {
       <Route
           exact
           path="/"
-          render={props => <Home user={user}/>}
+          render={props => <Home user={user} setUser={setUser}{...props}/>}
         />
         <Route
           exact

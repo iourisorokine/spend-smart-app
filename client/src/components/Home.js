@@ -11,11 +11,12 @@ const Home = props => {
       {props.user ? (
         <>
           <p>Hi, {props.user.username}!</p>
-          <BudgetsList />
+          <BudgetsList user={props.user}/>
         </>
       ) : (
         <>
-          <p>Please login to see your budgets</p>
+          <p>Welcome to Spend Smart</p>
+          <p>Please login or sign up to see your budgets</p>
         </>
       )}
     </div>

@@ -28,9 +28,8 @@ const BudgetsList = props => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("/api/budget")
+      .get(`/api/budget/user/${props.user._id}`)
       .then(response => {
-        console.log(response.data);
         setBudgetsData(response.data);
         setLoading(false);
       })

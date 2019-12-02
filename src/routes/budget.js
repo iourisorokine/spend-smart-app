@@ -38,6 +38,21 @@ router.post("/", (req, res) => {
       });
   });
 
+  // GET budgets with a certain user id
+  router.get("/user/:userId", (req, res) => {
+    const userId=req.params.userId;
+    console.log(req.params)
+    Budget.find({owner:userId})
+      .populate("spends")
+      .then(budgets => {
+      //  const filtered=budgets.filter(budget=> budget)
+        res.json(budgets);
+      })
+      .catch(err => {
+        res.json(err);
+      });
+  });
+
   //GET budget by id
   router.get("/:id", (req, res) => {
     // check if req.params.id is valid, if not respond with a 4xx status code

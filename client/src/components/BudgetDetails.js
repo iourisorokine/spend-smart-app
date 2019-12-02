@@ -19,7 +19,7 @@ const BudgetDetails = props => {
 
   const mapSpendLines = budgetData => {
     return budgetData.spends.map(spend => {
-      return <SpendLine data={spend}/>;
+      return <SpendLine data={spend} budgetId={props.match.params.id}/>;
     });
   };
 
@@ -32,7 +32,6 @@ const BudgetDetails = props => {
       .classList.remove("option-selected");
     e.target.classList.add("option-selected");
     setBudgetView(e.target.innerHTML);
-    console.log(budgetView);
   };
 
   const getSpendTotal = budgetData => {

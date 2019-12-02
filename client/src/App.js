@@ -42,7 +42,7 @@ const App = props => {
         />
         <Route
           path="/spend/:id"
-          render={props => <EditSpend {...props}/>}
+          render={props => <EditSpend budgetId={props.budgetId}{...props}/>}
         />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {Link} from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -14,18 +14,50 @@ import axios from "axios";
 
 const EditSpend = props => {
   const { classes } = props;
+  const [spendData, setSpendData] = useState(null)
+  const [loading, setLoading] = useState(false)
   const [spendName, setSpendName] = useState("");
   const [spendDate, setSpendDate] = useState(new Date());
   const [spendAmount, setSpendAmount] = useState(0);
   const [spendCategory, setSpendCategory] = useState("");
+  const [budgetId, setBudgetId] = useState(null);
+  
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`/api/spend/${props.match.params.id}`)
+      .then(response => {
+        setSpendData(response.data);
+        setSpendAmount(response.data.amount)
+        setSpendName(response.data.name)
+        setSpendDate(response.data.date)
+        setSpendCategory(response.data.category)
+        setBudgetId(response.data.budget)
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
   const handleChange = e => {
     const { name, value } = e.target;
     if (name === "spendName") setSpendName(value);
     if (name === "spendAmount") setSpendAmount(value);
     if (name === "spendDate") setSpendDate(value);
-    console.log(name,value)
   };
+
+  const deleteSpend = e =>{
+      e.preventDefault()
+      axios.delete(`/api/spend/${props.match.params.id}`)
+      .then(()=>{
+          console.log("deleted one spend from database")
+          props.history.push(`/budget/${budgetId}`)
+      })
+      .catch(err=>{
+          console.error(err)
+      })
+  } 
 
   const selectCategory = e => {
     const buttons = Array.from(
@@ -38,16 +70,15 @@ const EditSpend = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.setCreateSpend(false);
     axios
-      .put("/api/spend", {
+      .put(`/api/spend/${props.match.params.id}`, {
         name: spendName,
         amount: spendAmount,
         date: spendDate,
         category: spendCategory,
       })
       .then(response => {
-        props.getBudgetData();
+        props.history.push(`/budget/${spendData.budget}`)
       })
       .catch(err => {
         console.error(err);
@@ -57,16 +88,20 @@ const EditSpend = props => {
   return (
     <div className="create-spend narrow-wrapper">
       <h2>Edit Spend </h2>
+      {loading&&<p>Loading...</p>}
+      {spendData&&(
       <form onSubmit={handleSubmit}>
+      <button onClick={deleteSpend}>Delete Spend</button>
         <FormGroup>
           <FormControl>
             <InputLabel htmlFor="spendName">Name:</InputLabel>
-            <Input name="spendName" type="text" onChange={handleChange} />
+            <Input name="spendName" type="text" defaultValue={spendData.name} onChange={handleChange} />
           </FormControl>
           <FormControl>
             <InputLabel htmlFor="spendAmount">Amount:</InputLabel>
             <Input
               name="spendAmount"
+              defaultValue={spendData.amount}
               min="0"
               step="0.01"
               type="number"
@@ -111,11 +146,12 @@ const EditSpend = props => {
           <Button className={classes.buttonBlueGrad} type="submit">
             Save Changes
           </Button>
-          <Link to="/" className="black-link">
+          <Link to={`/budget/${spendData.budget}`} className="black-link">
             Cancel
           </Link>
         </FormGroup>
       </form>
+      )}
     </div>
   );
 };

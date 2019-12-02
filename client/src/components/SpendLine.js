@@ -10,7 +10,7 @@ const SpendLine = props => {
               <div className="spend-cat">{props.data.category}</div>
               <div className="spend-amount">{props.data.amount} EUR</div>
               <div className="spend-edit">
-                <Link to={editLink}>Edit</Link>
+                <Link to={editLink} budgetId={props.budgetId}>Edit</Link>
               </div>
             </div>
     )

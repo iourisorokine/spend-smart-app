@@ -38,7 +38,7 @@ const App = props => {
         />
         <Route
           path="/budget/:id"
-          render={props => <BudgetDetails {...props}/>}
+          render={props => <BudgetDetails user={user}{...props}/>}
         />
         <Route
           path="/spend/:id"

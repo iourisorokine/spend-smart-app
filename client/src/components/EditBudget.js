@@ -59,4 +59,4 @@ const EditBudget = props => {
     );
   };
 
-export default EditBudget
+export default withStyles(styles)(EditBudget)

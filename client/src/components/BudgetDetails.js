@@ -50,12 +50,14 @@ const BudgetDetails = props => {
 
   // getting the data only
   const getBudgetData = () => {
+    setLoading(true)
     axios
       .get(`/api/budget/${props.match.params.id}`)
       .then(response => {
         setBudgetData(response.data);
         setSpendLines(mapSpendLines(response.data));
         setSpendTotal(getSpendTotal(response.data));
+        setLoading(false)
       })
       .catch(err => {
         console.log(err);
@@ -64,18 +66,9 @@ const BudgetDetails = props => {
 
   //getting the data on component did mount
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get(`/api/budget/${props.match.params.id}`)
-      .then(response => {
-        setBudgetData(response.data);
-        setSpendLines(mapSpendLines(response.data));
-        setSpendTotal(getSpendTotal(response.data));
-        setLoading(false);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    if(props.user){
+      getBudgetData()
+    }
   }, []);
 
   return (

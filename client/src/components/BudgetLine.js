@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Budget = props => {
+const BudgetLine = props => {
   const linkAddress = `/budget/${props.budget._id}`;
   return (
     <Link to={linkAddress}>
@@ -13,4 +13,4 @@ const Budget = props => {
   );
 };
 
-export default Budget;
+export default BudgetLine;

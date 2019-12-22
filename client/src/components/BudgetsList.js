@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Budget from "./Budget";
+import BudgetLine from "./BudgetLine";
 import Button from '@material-ui/core/Button';
 import {Link} from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
@@ -17,7 +17,6 @@ const BudgetsList = props => {
     axios
       .get("/api/budget")
       .then(budgets => {
-        console.log(budgets);
       })
       .catch(err => {
         console.log(err);
@@ -39,7 +38,7 @@ const BudgetsList = props => {
   }, []);
 
   const budgetsToRender = budgetsData.map(el => {
-    return <Budget key={el._id} budget={el} />;
+    return <BudgetLine key={el._id} budget={el} />;
   });
 
   return (

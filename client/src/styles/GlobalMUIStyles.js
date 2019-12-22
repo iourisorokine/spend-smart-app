@@ -14,11 +14,11 @@ export const styles = {
       border: 0,
       borderRadius: "50%",
       boxShadow: "0 3px 5px 2px rgba(100, 240, 130, .3)",
-      fontSize: 50,
+      fontSize: 40,
       paddingBottom:15,
       lineHeight: "10px",
       color: "white",
-      height: 60,
-      Width: 60
+      height: 50,
+      Width: 50
     }
   };

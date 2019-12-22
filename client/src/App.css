@@ -128,10 +128,15 @@ a{
   padding: 20px 20px;
 }
 
-.btn-budget-lines, .btn-budget-graph{
+.btn-budget-lines, .btn-budget-graph, .btn-budget-edit, .btn-add-spend{
   padding: 5px 15px;
   color: black;
   border: 2px solid black;
+}
+
+.btn-budget-edit, .btn-add-spend{
+  border-radius: 5px;
+  margin: 0 10px;
 }
 
 .btn-budget-lines{

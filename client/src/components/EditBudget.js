@@ -48,7 +48,7 @@ const EditBudget = props => {
               <Input name="budgetDescription" type="text" onChange={handleChange} />
             </FormControl>
               <Button className={classes.buttonBlueGrad} type="submit">
-                Create Budget
+                Save changes
               </Button>
           </FormGroup>
         </form>

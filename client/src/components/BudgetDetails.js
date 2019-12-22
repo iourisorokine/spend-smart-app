@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
 import SpendLine from "./SpendLine";
 import CreateSpend from "./CreateSpend";
 import BudgetGraph from "./BudgetGraph";
 import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "../styles/GlobalMUIStyles";
+import BudgetTopMenu from "./BudgetTopMenu";
 
 const BudgetDetails = props => {
   const { classes } = props;
@@ -19,7 +18,7 @@ const BudgetDetails = props => {
 
   const mapSpendLines = budgetData => {
     return budgetData.spends.map(spend => {
-      return <SpendLine data={spend} budgetId={props.match.params.id}/>;
+      return <SpendLine data={spend} budgetId={props.match.params.id} />;
     });
   };
 
@@ -50,14 +49,14 @@ const BudgetDetails = props => {
 
   // getting the data only
   const getBudgetData = () => {
-    setLoading(true)
+    setLoading(true);
     axios
       .get(`/api/budget/${props.match.params.id}`)
       .then(response => {
         setBudgetData(response.data);
         setSpendLines(mapSpendLines(response.data));
         setSpendTotal(getSpendTotal(response.data));
-        setLoading(false)
+        setLoading(false);
       })
       .catch(err => {
         console.log(err);
@@ -66,60 +65,47 @@ const BudgetDetails = props => {
 
   //getting the data on component did mount
   useEffect(() => {
-    if(props.user){
-      getBudgetData()
+    if (props.user) {
+      getBudgetData();
     }
   }, []);
 
   return (
-    <div className="narrow-wrapper">
+    <>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <>
+        <div className="narrow-wrapper">
           {createSpend ? (
-            <>
-              <CreateSpend
-                budget={budgetData}
-                setCreateSpend={setCreateSpend}
-                getBudgetData={getBudgetData}
-              />
-              <button onClick={() => setCreateSpend(!createSpend)}>
-                Cancel
-              </button>
-            </>
+            <CreateSpend
+              budget={budgetData}
+              setCreateSpend={setCreateSpend}
+              getBudgetData={getBudgetData}
+            />
           ) : (
             <>
-              <div className="flex-row">
-                <h2>{budgetData && budgetData.name} - detail</h2>
-                <div className="flex-row btn-budget-container">
-                  <div
-                    className="btn-budget-lines option-selected"
-                    onClick={toggleBudgetView}>
-                    Details
-                  </div>
-                  <div className="btn-budget-graph" onClick={toggleBudgetView}>
-                    Graph
-                  </div>
+              {budgetData && (
+                <BudgetTopMenu
+                  budgetData={budgetData}
+                  toggleBudgetView={toggleBudgetView}
+                  createSpend={createSpend}
+                  setCreateSpend={setCreateSpend}
+                />
+              )}
+              {budgetData && budgetView === "Details" && (
+                <div>
+                  {spendLines}
+                  {spendTotal}
                 </div>
-              </div>
+              )}
+              {budgetData && budgetView === "Graph" && (
+                <BudgetGraph data={budgetData} />
+              )}
             </>
           )}
-          {budgetData && budgetView === "Details" && (
-            <div>
-              <Button
-                className={classes.buttonRoundAdd}
-                onClick={() => setCreateSpend(!createSpend)}>
-                +
-              </Button>
-              {spendLines}
-              {spendTotal}
-            </div>
-          )}
-          {budgetData && budgetView === "Graph" && <BudgetGraph data={budgetData}/>}
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

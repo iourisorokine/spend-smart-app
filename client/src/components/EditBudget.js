@@ -24,8 +24,9 @@ const EditBudget = props => {
   
     const handleSubmit = e => {
       e.preventDefault();
+      const budgetId=props.data._id
       axios
-        .post("/api/budget", { name: budgetName, description: budgetDescription })
+        .put(`/api/budget/${budgetId}`, { name: budgetName, description: budgetDescription })
         .then(() => {
           props.history.push("/")
         })
@@ -36,23 +37,23 @@ const EditBudget = props => {
   
     return (
       <div className="narrow-wrapper">
-        <h2>Create New Budget</h2>
+        <h2>Edit {props.data.budgetName}</h2>
         <form onSubmit={handleSubmit}>
           <FormGroup>
             <FormControl>
               <InputLabel htmlFor="name">Name:</InputLabel>
-              <Input name="budgetName" type="text" onChange={handleChange} />
+              <Input name="budgetName" defaultValue={props.data.name} type="text" onChange={handleChange} />
             </FormControl>
             <FormControl>
               <InputLabel htmlFor="budgetDescription">Description:</InputLabel>
-              <Input name="budgetDescription" type="text" onChange={handleChange} />
+              <Input name="budgetDescription" defaultValue={props.data.description} type="text" onChange={handleChange} />
             </FormControl>
               <Button className={classes.buttonBlueGrad} type="submit">
                 Save changes
               </Button>
           </FormGroup>
         </form>
-        <Link className="black-link" to="/">
+        <Link className="black-link" onClick={()=>props.setEditBudget(false)}>
           Back
         </Link>
       </div>

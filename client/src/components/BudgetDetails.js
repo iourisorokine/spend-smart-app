@@ -6,6 +6,7 @@ import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "../styles/GlobalMUIStyles";
 import BudgetTopMenu from "./BudgetTopMenu";
+import EditBudget from './EditBudget';
 
 const BudgetDetails = props => {
   const { classes } = props;
@@ -14,6 +15,7 @@ const BudgetDetails = props => {
   const [spendTotal, setSpendTotal] = useState(null);
   const [loading, setLoading] = useState(false);
   const [createSpend, setCreateSpend] = useState(false);
+  const [editBudget, setEditBudget] = useState(false);
   const [budgetView, setBudgetView] = useState("Details");
 
   const mapSpendLines = budgetData => {
@@ -76,32 +78,31 @@ const BudgetDetails = props => {
         <p>Loading...</p>
       ) : (
         <div className="narrow-wrapper">
-          {createSpend ? (
+          {createSpend && (
             <CreateSpend
               budget={budgetData}
               setCreateSpend={setCreateSpend}
               getBudgetData={getBudgetData}
             />
-          ) : (
-            <>
-              {budgetData && (
-                <BudgetTopMenu
-                  budgetData={budgetData}
-                  toggleBudgetView={toggleBudgetView}
-                  createSpend={createSpend}
-                  setCreateSpend={setCreateSpend}
-                />
-              )}
-              {budgetData && budgetView === "Details" && (
-                <div>
-                  {spendLines}
-                  {spendTotal}
-                </div>
-              )}
-              {budgetData && budgetView === "Graph" && (
-                <BudgetGraph data={budgetData} />
-              )}
-            </>
+          )}
+          {editBudget&&<EditBudget data={budgetData} setEditBudget={setEditBudget}/>}
+          {budgetData && (
+            <BudgetTopMenu
+              budgetData={budgetData}
+              toggleBudgetView={toggleBudgetView}
+              createSpend={createSpend}
+              setCreateSpend={setCreateSpend}
+              setEditBudget={setEditBudget}
+            />
+          )}
+          {budgetData && budgetView === "Details" && (
+            <div>
+              {spendLines}
+              {spendTotal}
+            </div>
+          )}
+          {budgetData && budgetView === "Graph" && (
+            <BudgetGraph data={budgetData} />
           )}
         </div>
       )}

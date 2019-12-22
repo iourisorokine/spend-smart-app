@@ -15,9 +15,9 @@ const BudgetTopMenu = props => {
               <div className="btn-budget-graph" onClick={props.toggleBudgetView}>
                 Graph
               </div>
-              <Link className="btn-budget-edit" to="#">
+              <div className="btn-budget-edit" onClick={() => props.setEditBudget(true)}>
                 Edit
-              </Link>
+              </div>
               <div
                 className="btn-add-spend"
                 onClick={() => props.setCreateSpend(!props.createSpend)}>

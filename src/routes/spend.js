@@ -78,7 +78,7 @@ router.put("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   const spendId = req.params.id;
   Spend.findByIdAndDelete(spendId)
-    .then(spend => {
+    .then(() => {
       return res.json({message: "ok"});
     })
     .catch(err => {

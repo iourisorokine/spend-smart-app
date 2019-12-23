@@ -24,19 +24,27 @@ const EditBudget = props => {
   
     const handleSubmit = e => {
       e.preventDefault();
-      const budgetId=props.data._id
       axios
-        .put(`/api/budget/${budgetId}`, { name: budgetName, description: budgetDescription })
+        .put(`/api/budget/${props.data._id}`, { name: budgetName, description: budgetDescription })
         .then(() => {
-          props.history.push("/")
+          props.setEditBudget(false)
         })
         .catch(err => {
           console.error(err);
         });
     };
+
+    const handleDelete = e =>{
+      axios.delete(`/api/budget/${props.data._id}`)
+      .then(()=>{
+        return(<Redirect to={"/"}/>)
+      }).catch(err => {
+        console.error(err);
+      });
+    }
   
     return (
-      <div className="narrow-wrapper">
+      <div className="narrow-wrapper edit-budget">
         <h2>Edit {props.data.budgetName}</h2>
         <form onSubmit={handleSubmit}>
           <FormGroup>
@@ -50,6 +58,9 @@ const EditBudget = props => {
             </FormControl>
               <Button className={classes.buttonBlueGrad} type="submit">
                 Save changes
+              </Button>
+              <Button className={classes.buttonRedGrad} onClick={handleDelete}>
+                Delete the Budget
               </Button>
           </FormGroup>
         </form>

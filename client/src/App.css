@@ -30,6 +30,10 @@ a{
   text-decoration: none;
 }
 
+.edit-budget{
+  height: 100vh;
+}
+
 .narrow-wrapper{
   max-width: 500px;
   padding: 0 15px;
@@ -44,12 +48,12 @@ a{
   color: #777;
 }
 
-.budget{
+.item-line{
   box-shadow: 2px 2px 8px #ccc;
   color: black;
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 5px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .flex-row{
@@ -63,7 +67,7 @@ a{
 .spend-line{
   display: flex;
   padding: 10px;
-  border: 1px solid #bbb;
+  /* border: 1px solid #bbb; */
 }
 
 .spend-title{

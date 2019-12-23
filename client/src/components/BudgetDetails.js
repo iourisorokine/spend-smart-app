@@ -19,7 +19,8 @@ const BudgetDetails = props => {
   const [budgetView, setBudgetView] = useState("Details");
 
   const mapSpendLines = budgetData => {
-    return budgetData.spends.map(spend => {
+    const budgetDataReversed=budgetData.spends.reverse();
+    return budgetDataReversed.map(spend => {
       return <SpendLine data={spend} budgetId={props.match.params.id} />;
     });
   };

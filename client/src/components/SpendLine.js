@@ -5,7 +5,7 @@ import EditSpend from './EditSpend';
 const SpendLine = props => {
     const editLink=`/spend/${props.data._id}`;
     return (
-            <div className="spend-line">
+            <div className="spend-line item-line">
               <div className="spend-title">{props.data.name}</div>
               <div className="spend-cat">{props.data.category}</div>
               <div className="spend-amount">{props.data.amount} EUR</div>

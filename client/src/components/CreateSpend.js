@@ -68,7 +68,7 @@ const CreateSpend = props => {
               name="spendAmount"
               min="0"
               step="0.01"
-              type="number"
+              type="currency"
               onChange={handleChange}
             />
           </FormControl>

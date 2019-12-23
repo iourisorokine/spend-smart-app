@@ -1,6 +1,6 @@
-#Spend Smart - an app to manage daily budget
+# Spend Smart - an app to manage daily budget
 
-##Basic functioning
+## Basic functioning
 
 The app is working on the principle of Tricount or Splitwise but focuses on categorizing spends and allows users to monitor their spend amounts by category.
 
@@ -8,7 +8,7 @@ Users can create budgets that acts like a common pot. Each budget contains lines
 
 Each budget can be visualized in details or as a graph by spend category
 
-##Tech
+## Tech Stack
 
 Backend is in Node.js with Express JS
 Database is MongoDB, connection is made via Mongoose

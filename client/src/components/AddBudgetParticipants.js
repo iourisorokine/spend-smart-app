@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -12,39 +12,41 @@ import { styles } from "../styles/GlobalMUIStyles";
 import axios from "axios";
 
 const AddBudgetParticipants = props => {
-    const { classes } = props;
-    const [newParticipant, setNewParticipant] = useState(null)
+  const { classes } = props;
+  const [newParticipant, setNewParticipant] = useState(null);
+  const [message, setMessage] = useState(null);
 
-const addParticipant=()=>{
+  const addParticipant = () => {
     const userName = newParticipant;
-    axios.get(`./api/user/${userName}`).then(res=>{
-        console.log(res.data.found[0])
-        props.setParticipants(props.participants.concat(res.data.found[0]._id))
-        console.log(props.participants)
-    })
-}
+    axios.get(`./api/user/${userName}`).then(res => {
+      if (!res.data.found) {
+        setMessage(res.data.message)
+      } else if (props.participants.indexOf(res.data.found[0]._id)!==-1){
+        setMessage("The budget is already shared with this user")
+      }else{
+        props.setParticipants(props.participants.concat(res.data.found[0]._id));
+        setMessage(res.data.message)
+      }
+    });
+  };
 
   return (
-    <div>
-      <p>Add budget participants</p>
-      <form>
+    <form>
       <FormGroup>
         <FormControl>
-          <InputLabel htmlFor="name">Searche participants:</InputLabel>
-          <Input name="participantName" type="text" onChange={e=>setNewParticipant(e.target.value)} />
+          <InputLabel htmlFor="name">Search participants:</InputLabel>
+          <Input
+            name="participantName"
+            type="text"
+            onChange={e => setNewParticipant(e.target.value)}
+          />
+        {message&&<p>{message}</p>}
         </FormControl>
         <Button className={classes.buttonBlueGrad} onClick={addParticipant}>
-            Add
+          Add
         </Button>
       </FormGroup>
-      </form>
-      <Link
-        className="black-link"
-        onClick={() => props.setAddParticipants(false)}
-        to="#">
-        Back
-      </Link>
-    </div>
+    </form>
   );
 };
 

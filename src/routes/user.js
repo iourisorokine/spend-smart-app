@@ -9,10 +9,11 @@ router.get("/:userName",(req,res)=>{
     console.log(req.params);
     User.find({ username: userName })
       .then(found => {
-        if (!found){
+        console.log("#####Found:",found)
+        if (!found.length){
             return res.json({message: "no user corresponds to that name"})
         }
-        if (found) {
+        else if (found.length) {
           return res.json({found, message:"The user has been added"});
         }
     }).catch(err => {

@@ -100,7 +100,6 @@ const BudgetGraph = props => {
   return (
     <div>
       <div className="flex-row">
-        <InputLabel id="month">Select Month:</InputLabel>
         <Select
           labelId="month"
           name="month"
@@ -108,8 +107,8 @@ const BudgetGraph = props => {
           onChange={e => setSelectedMonth(e.target.value)}>
           {monthsToRender}
         </Select>
+      <h4>Breakdown by categories:</h4>
       </div>
-      <h4>Your budget by categories:</h4>
       <Doughnut data={graphData} width={300} height={150}></Doughnut>
       <p>
         Total Spend for {monthStr}: {totalSpend} EUR

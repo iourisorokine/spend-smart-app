@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BudgetLine from "./BudgetLine";
-import Button from '@material-ui/core/Button';
-import {Link} from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "../styles/GlobalMUIStyles";
-
+import { CircleSpinner } from "react-spinners-kit";
 
 const BudgetsList = props => {
-  const {classes} = props;
+  const { classes } = props;
   const [budgetsData, setBudgetsData] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -16,8 +16,7 @@ const BudgetsList = props => {
   const getBudgetsData = () => {
     axios
       .get("/api/budget")
-      .then(budgets => {
-      })
+      .then(budgets => {})
       .catch(err => {
         console.log(err);
       });
@@ -46,7 +45,9 @@ const BudgetsList = props => {
       <Link to="/create-budget">
         <Button className={classes.buttonRoundAdd}>+</Button>
       </Link>
-      {loading && <p>loading...</p>}
+      <div className="spinner-container">
+        <CircleSpinner size={30} color="#686769" loading={loading} />
+      </div>
       {budgetsToRender}
     </div>
   );

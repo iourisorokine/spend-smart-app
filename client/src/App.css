@@ -30,6 +30,12 @@ a{
   text-decoration: none;
 }
 
+.spinner-container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 .btn-auth-container{
   height: 50px;
   margin: 20px auto;

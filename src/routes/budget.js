@@ -41,7 +41,7 @@ router.get("/", (req, res) => {
 router.get("/user/:userId", (req, res) => {
   const userId = req.params.userId;
   console.log(req.params);
-  Budget.find({ owner: userId })
+  Budget.find({ $or:[{owner: userId}, {participants:{$in:[userId]}}]})
     .populate("spends")
     .then(budgets => {
       res.json(budgets);

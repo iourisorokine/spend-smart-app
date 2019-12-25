@@ -7,6 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { styles } from "../styles/GlobalMUIStyles";
 import BudgetTopMenu from "./BudgetTopMenu";
 import EditBudget from "./EditBudget";
+import { CircleSpinner } from "react-spinners-kit";
 
 const BudgetDetails = props => {
   const { classes } = props;
@@ -75,42 +76,43 @@ const BudgetDetails = props => {
 
   return (
     <>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <div className="narrow-wrapper pad-bottom-100">
-            {createSpend && (
-              <CreateSpend
-                budget={budgetData}
-                setCreateSpend={setCreateSpend}
-                getBudgetData={getBudgetData}
-              />
-            )}
-            {editBudget && (
-              <EditBudget
-                data={budgetData}
-                setEditBudget={setEditBudget}
-                getBudgetData={getBudgetData}
-              />
-            )}
-            {budgetData && (
-              <BudgetTopMenu
-                budgetData={budgetData}
-                toggleBudgetView={toggleBudgetView}
-                createSpend={createSpend}
-                setCreateSpend={setCreateSpend}
-                setEditBudget={setEditBudget}
-              />
-            )}
-            {budgetData && budgetView === "Details" && <>{spendLines}</>}
-            {budgetData && budgetView === "Graph" && (
-              <BudgetGraph data={budgetData} />
-            )}
-          </div>
-          <div className="spend-total">{spendTotal}</div>
+      <div>
+        <div className="spinner-container">
+          <CircleSpinner size={30} color="#686769" loading={loading} />
         </div>
-      )}
+        <div className="narrow-wrapper pad-bottom-100">
+          {createSpend && (
+            <CreateSpend
+              budget={budgetData}
+              setCreateSpend={setCreateSpend}
+              getBudgetData={getBudgetData}
+            />
+          )}
+          {editBudget && (
+            <EditBudget
+              data={budgetData}
+              setEditBudget={setEditBudget}
+              getBudgetData={getBudgetData}
+            />
+          )}
+          {budgetData && (
+            <BudgetTopMenu
+              budgetData={budgetData}
+              toggleBudgetView={toggleBudgetView}
+              createSpend={createSpend}
+              setCreateSpend={setCreateSpend}
+              setEditBudget={setEditBudget}
+            />
+          )}
+          {budgetData && budgetView === "Details" && <>{spendLines}</>}
+          {budgetData && budgetView === "Graph" && (
+            <BudgetGraph data={budgetData} />
+          )}
+        </div>
+        <div className="spend-total">
+          <div className="narrow-wrapper">{spendTotal}</div>
+        </div>
+      </div>
     </>
   );
 };

@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { styles } from "../styles/GlobalMUIStyles";
 import axios from "axios";
+import moment from 'moment';
 
 const CreateSpend = props => {
   const { classes } = props;
@@ -77,6 +78,7 @@ const CreateSpend = props => {
               name="spendDate"
               label="Date:"
               type="date"
+              defaultValue={moment().format('YYYY-MM-DD')}
               className={classes.textField}
               onChange={handleChange}
               InputLabelProps={{

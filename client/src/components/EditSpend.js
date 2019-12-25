@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import {
   FormGroup,
@@ -11,28 +11,29 @@ import {
 } from "@material-ui/core";
 import { styles } from "../styles/GlobalMUIStyles";
 import axios from "axios";
+import moment from "moment";
 
 const EditSpend = props => {
   const { classes } = props;
-  const [spendData, setSpendData] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [spendData, setSpendData] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [spendName, setSpendName] = useState("");
   const [spendDate, setSpendDate] = useState(new Date());
   const [spendAmount, setSpendAmount] = useState(0);
   const [spendCategory, setSpendCategory] = useState("");
   const [budgetId, setBudgetId] = useState(null);
-  
+
   useEffect(() => {
     setLoading(true);
     axios
       .get(`/api/spend/${props.match.params.id}`)
       .then(response => {
         setSpendData(response.data);
-        setSpendAmount(response.data.amount)
-        setSpendName(response.data.name)
-        setSpendDate(response.data.date)
-        setSpendCategory(response.data.category)
-        setBudgetId(response.data.budget)
+        setSpendAmount(response.data.amount);
+        setSpendName(response.data.name);
+        setSpendDate(response.data.date);
+        setSpendCategory(response.data.category);
+        setBudgetId(response.data.budget);
         setLoading(false);
       })
       .catch(err => {
@@ -47,17 +48,18 @@ const EditSpend = props => {
     if (name === "spendDate") setSpendDate(value);
   };
 
-  const deleteSpend = e =>{
-      e.preventDefault()
-      axios.delete(`/api/spend/${props.match.params.id}`)
-      .then(()=>{
-          console.log("deleted one spend from database")
-          props.history.push(`/budget/${budgetId}`)
+  const deleteSpend = e => {
+    e.preventDefault();
+    axios
+      .delete(`/api/spend/${props.match.params.id}`)
+      .then(() => {
+        console.log("deleted one spend from database");
+        props.history.push(`/budget/${budgetId}`);
       })
-      .catch(err=>{
-          console.error(err)
-      })
-  } 
+      .catch(err => {
+        console.error(err);
+      });
+  };
 
   const selectCategory = e => {
     const buttons = Array.from(
@@ -75,10 +77,10 @@ const EditSpend = props => {
         name: spendName,
         amount: spendAmount,
         date: spendDate,
-        category: spendCategory,
+        category: spendCategory
       })
       .then(response => {
-        props.history.push(`/budget/${spendData.budget}`)
+        props.history.push(`/budget/${spendData.budget}`);
       })
       .catch(err => {
         console.error(err);
@@ -88,69 +90,75 @@ const EditSpend = props => {
   return (
     <div className="create-spend narrow-wrapper">
       <h2>Edit Spend </h2>
-      {loading&&<p>Loading...</p>}
-      {spendData&&(
-      <form onSubmit={handleSubmit}>
-      <button onClick={deleteSpend}>Delete Spend</button>
-        <FormGroup>
-          <FormControl>
-            <InputLabel htmlFor="spendName">Name:</InputLabel>
-            <Input name="spendName" type="text" defaultValue={spendData.name} onChange={handleChange} />
-          </FormControl>
-          <FormControl>
-            <InputLabel htmlFor="spendAmount">Amount:</InputLabel>
-            <Input
-              name="spendAmount"
-              defaultValue={spendData.amount}
-              min="0"
-              step="0.01"
-              type="number"
-              onChange={handleChange}
-            />
-          </FormControl>
-          <FormControl>
-            <TextField
-              name="spendDate"
-              label="Date:"
-              type="date"
-              className={classes.textField}
-              onChange={handleChange}
-              InputLabelProps={{
-                shrink: true
-              }}
-            />
-          </FormControl>
-          <div className="category-options-container">
-            <div className="category-option" onClick={selectCategory}>
-              Food
+      {loading && <p>Loading...</p>}
+      {spendData && (
+        <form onSubmit={handleSubmit}>
+          <button onClick={deleteSpend}>Delete Spend</button>
+          <FormGroup>
+            <FormControl>
+              <InputLabel htmlFor="spendName">Name:</InputLabel>
+              <Input
+                name="spendName"
+                type="text"
+                defaultValue={spendData.name}
+                onChange={handleChange}
+              />
+            </FormControl>
+            <FormControl>
+              <InputLabel htmlFor="spendAmount">Amount:</InputLabel>
+              <Input
+                name="spendAmount"
+                defaultValue={spendData.amount}
+                min="0"
+                step="0.01"
+                type="number"
+                onChange={handleChange}
+              />
+            </FormControl>
+            <FormControl>
+              <TextField
+                name="spendDate"
+                label="Date:"
+                type="date"
+                defaultValue={moment(spendData.date).format("YYYY-MM-DD")}
+                className={classes.textField}
+                onChange={handleChange}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+            </FormControl>
+            <div className="category-options-container">
+              <div className="category-option" onClick={selectCategory}>
+                Food
+              </div>
+              <div className="category-option" onClick={selectCategory}>
+                Accomodation
+              </div>
+              <div className="category-option" onClick={selectCategory}>
+                Transport
+              </div>
+              <div className="category-option" onClick={selectCategory}>
+                Clothes
+              </div>
+              <div className="category-option" onClick={selectCategory}>
+                Culture
+              </div>
+              <div className="category-option" onClick={selectCategory}>
+                Leisure
+              </div>
+              <div className="category-option" onClick={selectCategory}>
+                Drinks
+              </div>
             </div>
-            <div className="category-option" onClick={selectCategory}>
-              Accomodation
-            </div>
-            <div className="category-option" onClick={selectCategory}>
-              Transport
-            </div>
-            <div className="category-option" onClick={selectCategory}>
-              Clothes
-            </div>
-            <div className="category-option" onClick={selectCategory}>
-              Culture
-            </div>
-            <div className="category-option" onClick={selectCategory}>
-              Leisure
-            </div>
-            <div className="category-option" onClick={selectCategory}>
-              Drinks
-            </div>
-          </div>
-          <Button className={classes.buttonBlueGrad} type="submit">
-            Save Changes
-          </Button>
-          <Link to={`/budget/${spendData.budget}`} className="black-link">
-            Cancel
-          </Link>
-        </FormGroup>
-      </form>
+            <Button className={classes.buttonBlueGrad} type="submit">
+              Save Changes
+            </Button>
+            <Link to={`/budget/${spendData.budget}`} className="black-link">
+              Cancel
+            </Link>
+          </FormGroup>
+        </form>
       )}
     </div>
   );

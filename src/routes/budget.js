@@ -9,6 +9,7 @@ router.post("/", (req, res) => {
   console.log(req.body);
   const owner = req.user._id;
   const { name, description, participants } = req.body;
+  participants.push(owner)
 
   Budget.create({
     name,
@@ -43,7 +44,6 @@ router.get("/user/:userId", (req, res) => {
   Budget.find({ owner: userId })
     .populate("spends")
     .then(budgets => {
-      //  const filtered=budgets.filter(budget=> budget)
       res.json(budgets);
     })
     .catch(err => {

@@ -28,6 +28,7 @@ const EditBudget = props => {
         .put(`/api/budget/${props.data._id}`, { name: budgetName, description: budgetDescription })
         .then(() => {
           props.setEditBudget(false)
+          props.getBudgetData()
         })
         .catch(err => {
           console.error(err);

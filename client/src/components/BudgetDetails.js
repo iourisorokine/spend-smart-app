@@ -6,7 +6,7 @@ import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "../styles/GlobalMUIStyles";
 import BudgetTopMenu from "./BudgetTopMenu";
-import EditBudget from './EditBudget';
+import EditBudget from "./EditBudget";
 
 const BudgetDetails = props => {
   const { classes } = props;
@@ -19,7 +19,7 @@ const BudgetDetails = props => {
   const [budgetView, setBudgetView] = useState("Details");
 
   const mapSpendLines = budgetData => {
-    const budgetDataReversed=budgetData.spends.reverse();
+    const budgetDataReversed = budgetData.spends.reverse();
     return budgetDataReversed.map(spend => {
       return <SpendLine data={spend} budgetId={props.match.params.id} />;
     });
@@ -43,7 +43,7 @@ const BudgetDetails = props => {
         <div className="spend-title">
           <h3>Total:</h3>
         </div>
-        <div className="spend-total">
+        <div className="total-amount">
           <h3>{total} EUR</h3>
         </div>
       </div>
@@ -78,33 +78,37 @@ const BudgetDetails = props => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className="narrow-wrapper">
-          {createSpend && (
-            <CreateSpend
-              budget={budgetData}
-              setCreateSpend={setCreateSpend}
-              getBudgetData={getBudgetData}
-            />
-          )}
-          {editBudget&&<EditBudget data={budgetData} setEditBudget={setEditBudget}/>}
-          {budgetData && (
-            <BudgetTopMenu
-              budgetData={budgetData}
-              toggleBudgetView={toggleBudgetView}
-              createSpend={createSpend}
-              setCreateSpend={setCreateSpend}
-              setEditBudget={setEditBudget}
-            />
-          )}
-          {budgetData && budgetView === "Details" && (
-            <div>
-              {spendLines}
-              {spendTotal}
-            </div>
-          )}
-          {budgetData && budgetView === "Graph" && (
-            <BudgetGraph data={budgetData} />
-          )}
+        <div>
+          <div className="narrow-wrapper pad-bottom-100">
+            {createSpend && (
+              <CreateSpend
+                budget={budgetData}
+                setCreateSpend={setCreateSpend}
+                getBudgetData={getBudgetData}
+              />
+            )}
+            {editBudget && (
+              <EditBudget
+                data={budgetData}
+                setEditBudget={setEditBudget}
+                getBudgetData={getBudgetData}
+              />
+            )}
+            {budgetData && (
+              <BudgetTopMenu
+                budgetData={budgetData}
+                toggleBudgetView={toggleBudgetView}
+                createSpend={createSpend}
+                setCreateSpend={setCreateSpend}
+                setEditBudget={setEditBudget}
+              />
+            )}
+            {budgetData && budgetView === "Details" && <>{spendLines}</>}
+            {budgetData && budgetView === "Graph" && (
+              <BudgetGraph data={budgetData} />
+            )}
+          </div>
+          <div className="spend-total">{spendTotal}</div>
         </div>
       )}
     </>

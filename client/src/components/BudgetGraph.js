@@ -31,12 +31,10 @@ const filterDataByMonth = (data, month) => {
   const filtered = data.filter(
     spend => new Date(spend.date).getMonth() === month
   );
-  console.log(filtered);
   return filtered;
 };
 
 const BudgetGraph = props => {
-  const [monthToSelect, setMonthToSelect] = useState(0);
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   let monthStr = months[selectedMonth];
   const categories = [
@@ -106,11 +104,10 @@ const BudgetGraph = props => {
         <Select
           labelId="month"
           name="month"
-          value={monthToSelect}
-          onChange={e => setMonthToSelect(e.target.value)}>
+          value={selectedMonth}
+          onChange={e => setSelectedMonth(e.target.value)}>
           {monthsToRender}
         </Select>
-        <button onClick={() => setSelectedMonth(monthToSelect)}>filter</button>
       </div>
       <h4>Your budget by categories:</h4>
       <Doughnut data={graphData} width={300} height={150}></Doughnut>

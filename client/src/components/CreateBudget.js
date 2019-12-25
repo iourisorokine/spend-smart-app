@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   FormGroup,
   FormControl,
@@ -8,13 +8,15 @@ import {
   Input,
   Button
 } from "@material-ui/core";
-import {styles} from "../styles/GlobalMUIStyles"
+import { styles } from "../styles/GlobalMUIStyles";
+import AddBudgetParticipants from "./AddBudgetParticipants";
 import axios from "axios";
-
 
 const CreateBudget = props => {
   const { classes } = props;
   const [budgetName, setBudgetName] = useState("");
+  const [addParticipants, setAddParticipants] = useState(false);
+  const [participants, setParticipants] = useState([]);
   const [budgetDescription, setBudgetDescription] = useState("");
 
   const handleChange = e => {
@@ -26,9 +28,9 @@ const CreateBudget = props => {
   const handleSubmit = e => {
     e.preventDefault();
     axios
-      .post("/api/budget", { name: budgetName, description: budgetDescription })
+      .post("/api/budget", { name: budgetName, description: budgetDescription, participants })
       .then(() => {
-        props.history.push("/")
+        props.history.push("/");
       })
       .catch(err => {
         console.error(err);
@@ -46,11 +48,29 @@ const CreateBudget = props => {
           </FormControl>
           <FormControl>
             <InputLabel htmlFor="budgetDescription">Description:</InputLabel>
-            <Input name="budgetDescription" type="text" onChange={handleChange} />
+            <Input
+              name="budgetDescription"
+              type="text"
+              onChange={handleChange}
+            />
           </FormControl>
-            <Button className={classes.buttonBlueGrad} type="submit">
-              Create Budget
+          {addParticipants ? (
+            <AddBudgetParticipants
+              setAddParticipants={setAddParticipants}
+              participants={participants}
+              setParticipants={setParticipants}
+            />
+          ) : (
+            <Button
+              className={classes.buttonBlueGrad}
+              onClick={() => setAddParticipants(true)}>
+              Add Participants
             </Button>
+          )}
+
+          <Button className={classes.buttonBlueGrad} type="submit">
+            Create Budget
+          </Button>
         </FormGroup>
       </form>
       <Link className="black-link" to="/">

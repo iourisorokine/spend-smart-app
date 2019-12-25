@@ -5,9 +5,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import { logout } from "../services/api";
 
 const useStyles = makeStyles(theme => ({
@@ -34,49 +31,15 @@ const handleLogout = props => {
 const Navbar = props => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  console.log('navbar user:', props.user)
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.bar}>
+      <AppBar position="static" styles={{position:"sticky"}} className={classes.bar}>
         <Toolbar>
-          <IconButton
-            aria-controls="simple-menu"
-            aria-haspopup="true"
-            onClick={handleClick}
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu">
-            ☰
-          </IconButton>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            transformOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left',
-            }}
-            getContentAnchorEl={null}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}>
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Some stuff</MenuItem>
-          </Menu>
           <Typography variant="h6" className={classes.title}>
             <Link to="/">Spend Smart</Link>
           </Typography>
@@ -105,3 +68,21 @@ const Navbar = props => {
 };
 
 export default Navbar;
+
+/* Typography:
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'subtitle1'
+  | 'subtitle2'
+  | 'body1'
+  | 'body2'
+  | 'caption'
+  | 'button'
+  | 'overline';
+
+
+*/

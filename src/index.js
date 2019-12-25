@@ -71,6 +71,9 @@ app.use("/",index);
 const authRoutes =require("./routes/auth")
 app.use("/api/auth",authRoutes);
 
+const userRoutes =require("./routes/user")
+app.use("/api/user",userRoutes);
+
 const budgetRoutes =require("./routes/budget")
 app.use("/api/budget",budgetRoutes);
 

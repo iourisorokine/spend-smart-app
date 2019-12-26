@@ -93,7 +93,6 @@ const EditSpend = props => {
       {loading && <p>Loading...</p>}
       {spendData && (
         <form onSubmit={handleSubmit}>
-          <button onClick={deleteSpend}>Delete Spend</button>
           <FormGroup>
             <FormControl>
               <InputLabel htmlFor="spendName">Name:</InputLabel>
@@ -154,6 +153,7 @@ const EditSpend = props => {
             <Button className={classes.buttonBlueGrad} type="submit">
               Save Changes
             </Button>
+            <Button className={classes.buttonRedGrad} onClick={deleteSpend}>Delete Spend</Button>
             <Link to={`/budget/${spendData.budget}`} className="black-link">
               Cancel
             </Link>

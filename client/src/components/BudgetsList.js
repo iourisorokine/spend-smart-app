@@ -43,7 +43,7 @@ const BudgetsList = props => {
   return (
     <div className="narrow-wrapper">
       <Link to="/create-budget">
-        <Button className={classes.buttonRoundAdd}>+</Button>
+        <Button className={classes.buttonRoundAdd}>+ Create Budget</Button>
       </Link>
       <div className="spinner-container">
         <CircleSpinner size={30} color="#686769" loading={loading} />

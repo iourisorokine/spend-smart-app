@@ -14,14 +14,14 @@ const WelcomeScreen = props => {
         Welcome to Spend Smart, the app that helps you managing your budget.
         Please login or sign-up in order to continue.
       </Typography>
-      <div className="btn-auth-container">
-        <Button className={classes.buttonBlueGrad} style={{ width: "100%" }}>
-          <Link to="/auth/login">Login</Link>
-        </Button>
-      </div>
-      <div className="btn-auth-container">
+      <div className="btn-container">
         <Button className={classes.buttonBlueGrad} style={{ width: "100%" }}>
           <Link to="/auth/signup">Signup</Link>
+        </Button>
+      </div>
+      <div className="btn-container">
+        <Button className={classes.buttonWhiteGrad} style={{ width: "100%" }}>
+          <Link style={{color: "#2196F3"}} to="/auth/login">Login</Link>
         </Button>
       </div>
     </div>

@@ -5,6 +5,7 @@
     "node": "10.15.2",
     "npm": "6.4.1"
   },
+  "start":"babel-node index.js",
   "description": "Budget management app",
   "main": "dist",
   "scripts": {

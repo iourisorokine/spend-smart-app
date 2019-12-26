@@ -21,6 +21,7 @@ mongoose
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
     );
+    //console.log(path.join(__dirname, "../client/public", "images", "favicon.ico"))
   })
   .catch(err => {
     console.error("Error connecting to mongo", err);
@@ -38,8 +39,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // View engine
-app.use(express.static(path.join(__dirname, "/client/build")));
-//app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
+app.use(express.static(path.join(__dirname, "../client/build")));
+app.use(favicon(path.join(__dirname, "../client/public", "favicon.ico")));
 
 // 3rd party middleware
 app.use(cors({

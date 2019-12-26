@@ -89,12 +89,12 @@ const BudgetDetails = props => {
               getBudgetData={getBudgetData}
             />
           )}
-          {/* {editBudget && (
+          {editBudget && (
             <EditBudget
               data={budgetData}
               setEditBudget={setEditBudget}
               getBudgetData={getBudgetData}
-            /> */}
+            />
           )}
           {budgetData && (
             <BudgetTopMenu

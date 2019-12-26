@@ -13,7 +13,7 @@ require("dotenv").config();
 const session = require("express-session");
 
 mongoose
-  .connect("mongodb://localhost/spend-smart-database", {
+  .connect(process.env.MONGODB_URI ||"mongodb://localhost/spend-smart-database", {
     useNewUrlParser: true
   })
   .then(x => {

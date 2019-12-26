@@ -6,6 +6,7 @@ const spendSchema = new Schema({
     date: Date,
     amount: Number,
     category: String,
+    spender: {type: Schema.Types.ObjectId, ref: "User"},
     budget: { type: Schema.Types.ObjectId, ref: "Budget" }
 })
 

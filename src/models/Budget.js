@@ -6,7 +6,8 @@ const budgetSchema = new Schema({
   description: String,
   owner: { type: Schema.Types.ObjectId, ref: "User" },
   participants: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  spends: [{ type: Schema.Types.ObjectId, ref: "Spend" }]
+  spends: [{ type: Schema.Types.ObjectId, ref: "Spend" }],
+  customCategories:[String]
 });
 
 const Budget = model("Budget", budgetSchema);

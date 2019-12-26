@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from "react";
 import './App.css';
-import { Route, Redirect} from "react-router-dom";
+import { Route} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import EditSpend from "./components/EditSpend";
-import CreateBudget from "./components/CreateBudget"
-import BudgetDetails from "./components/BudgetDetails"
+import CreateBudget from "./components/CreateBudget";
+import BudgetDetails from "./components/BudgetDetails";
+import EditBudget from './components/EditBudget';
 
 const App = props => {
 
@@ -39,6 +40,10 @@ const App = props => {
         <Route
           path="/budget/:id"
           render={props => <BudgetDetails user={user}{...props}/>}
+        />
+        <Route
+          path="/budget/edit/:id"
+          render={props => <EditBudget user={user}{...props}/>}
         />
         <Route
           path="/spend/:id"

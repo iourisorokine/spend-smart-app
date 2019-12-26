@@ -83,17 +83,18 @@ const BudgetDetails = props => {
         <div className="narrow-wrapper pad-bottom-100">
           {createSpend && (
             <CreateSpend
+              user={props.user}
               budget={budgetData}
               setCreateSpend={setCreateSpend}
               getBudgetData={getBudgetData}
             />
           )}
-          {editBudget && (
+          {/* {editBudget && (
             <EditBudget
               data={budgetData}
               setEditBudget={setEditBudget}
               getBudgetData={getBudgetData}
-            />
+            /> */}
           )}
           {budgetData && (
             <BudgetTopMenu

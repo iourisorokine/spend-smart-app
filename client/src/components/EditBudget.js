@@ -38,7 +38,8 @@ const EditBudget = props => {
     const handleDelete = e =>{
       axios.delete(`/api/budget/${props.data._id}`)
       .then(()=>{
-        return(<Redirect to={"/"}/>)
+        props.setEditBudget(false)
+        props.history.push("/")
       }).catch(err => {
         console.error(err);
       });

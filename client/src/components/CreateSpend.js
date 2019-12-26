@@ -44,7 +44,8 @@ const CreateSpend = props => {
         amount: spendAmount,
         date: spendDate,
         category: spendCategory,
-        budgetId: props.budget._id
+        budgetId: props.budget._id,
+        spender:props.user.username
       })
       .then(response => {
         props.getBudgetData();

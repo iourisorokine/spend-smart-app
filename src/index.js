@@ -8,6 +8,7 @@ const mongoose = require("mongoose")
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const logger = require("morgan");
+const path = require('path');
 
 require("dotenv").config();
 const session = require("express-session");
@@ -83,5 +84,10 @@ app.use("/api/budget",budgetRoutes);
 
 const spendRoutes =require("./routes/spend")
 app.use("/api/spend",spendRoutes);
+
+app.use((req, res) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/client/build/index.html");
+});
 
 export default app;

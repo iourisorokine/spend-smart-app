@@ -5,7 +5,7 @@
     "node": "10.15.2",
     "npm": "6.4.1"
   },
-  "start":"babel-node index.js",
+  "start": "babel-node index.js",
   "description": "Budget management app",
   "main": "dist",
   "scripts": {
@@ -47,6 +47,7 @@
     "morgan": "^1.8.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "path": "^0.12.7",
     "react-router-dom": "^5.1.2",
     "resource-router-middleware": "^0.6.0",
     "serve-favicon": "^2.5.0"

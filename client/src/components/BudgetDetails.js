@@ -45,7 +45,7 @@ const BudgetDetails = props => {
           <h3>Total:</h3>
         </div>
         <div className="total-amount">
-          <h3>{total} EUR</h3>
+          <h3>€{total.toFixed(2)}</h3>
         </div>
       </div>
     );

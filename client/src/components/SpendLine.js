@@ -7,8 +7,8 @@ const SpendLine = props => {
     return (
             <div className="spend-line item-line">
               <div className="spend-title">{props.data.name}</div>
-              <div className="spend-cat">{props.data.category}</div>
-              <div className="spend-amount">{props.data.amount} EUR</div>
+              <div className="spend-cat">{props.data.category&&props.data.category.slice(0,4)}{'.'}</div>
+              <div className="spend-amount">€{props.data.amount.toFixed(2)}</div>
               <div className="spend-edit">
                 <Link to={editLink} budgetId={props.budgetId}>Edit</Link>
               </div>

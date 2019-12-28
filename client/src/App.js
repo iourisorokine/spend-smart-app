@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import './App.css';
 import { Route} from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -10,27 +10,35 @@ import CreateBudget from "./components/CreateBudget";
 import BudgetDetails from "./components/BudgetDetails";
 import EditBudget from './components/EditBudget';
 
-const App = props => {
+class App extends React.Component {
+  state = {
+    user: this.props.user
+  };
 
-  const [user, setUser]= useState(null)
+  setUser = user => {
+    this.setState({
+      user: user
+    });
+  };
 
+render(){
   return (
     <div className="App">
-      <Navbar user={user} setUser={setUser}{...props}/>
+      <Navbar user={this.state.user} setUser={this.setUser}/>
       <Route
           exact
           path="/"
-          render={props => <Home user={user} setUser={setUser}{...props}/>}
+          render={props => <Home user={this.state.user} setUser={this.setUser}{...props}/>}
         />
         <Route
           exact
           path="/auth/signup"
-          render={props => <Signup setUser={setUser}{...props}/>}
+          render={props => <Signup setUser={this.setUser}{...props}/>}
         />
         <Route
           exact
           path="/auth/login"
-          render={props => <Login setUser={setUser}{...props}/>}
+          render={props => <Login setUser={this.setUser}{...props}/>}
         />
         <Route
           exact
@@ -39,11 +47,11 @@ const App = props => {
         />
         <Route
           path="/budget/:id"
-          render={props => <BudgetDetails user={user}{...props}/>}
+          render={props => <BudgetDetails user={this.state.user}{...props}/>}
         />
         <Route
           path="/budget/edit/:id"
-          render={props => <EditBudget user={user}{...props}/>}
+          render={props => <EditBudget user={this.state.user}{...props}/>}
         />
         <Route
           path="/spend/:id"
@@ -51,6 +59,7 @@ const App = props => {
         />
     </div>
   );
+}
 }
 
 export default App;

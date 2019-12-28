@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Doughnut } from "react-chartjs-2";
+import { Doughnut, Bar } from "react-chartjs-2";
 import { Select, InputLabel, MenuItem } from "@material-ui/core";
 
 const months = [
@@ -23,7 +23,8 @@ const getAmountsPerCat = (cats, data) => {
       if (val.category === cat) return acc + val.amount;
       return acc;
     }, 0);
-  });
+  })
+  // does not filter out the empty categories, returns an array with values only
   return amountsPerCat;
 };
 
@@ -99,7 +100,8 @@ const BudgetGraph = props => {
 
   return (
     <div>
-      <div className="flex-row">
+      <div className="space-around">
+        <h4>Select month:</h4>
         <Select
           labelId="month"
           name="month"
@@ -107,9 +109,8 @@ const BudgetGraph = props => {
           onChange={e => setSelectedMonth(e.target.value)}>
           {monthsToRender}
         </Select>
-      <h4>Breakdown by categories:</h4>
       </div>
-      <Doughnut data={graphData} width={300} height={150}></Doughnut>
+      <Bar data={graphData} width={"100vw"} height={"50vh"}></Bar>
       <p>
         Total Spend for {monthStr}: {totalSpend} EUR
       </p>

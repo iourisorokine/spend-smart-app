@@ -110,9 +110,11 @@ const BudgetDetails = props => {
             <BudgetGraph data={budgetData} />
           )}
         </div>
+        {!createSpend&&(
         <div className="spend-total">
           <div className="narrow-wrapper">{spendTotal}</div>
         </div>
+        )}
       </div>
     </>
   );

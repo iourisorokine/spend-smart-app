@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Doughnut, Bar } from "react-chartjs-2";
+import { Doughnut, Bar, HorizontalBar } from "react-chartjs-2";
 import { Select, InputLabel, MenuItem } from "@material-ui/core";
 
 const months = [
@@ -52,7 +52,14 @@ const BudgetGraph = props => {
     props.data.spends,
     selectedMonth
   );
-  const amountsPerCat = getAmountsPerCat(categories, spendDataForSelectedMonth);
+  const values = getAmountsPerCat(categories, spendDataForSelectedMonth);
+  const categoriesFiltered = categories.filter((el, i)=>getAmountsPerCat(categories, spendDataForSelectedMonth)[i]!==0)
+
+  const amountsPerCat ={
+    categories: categoriesFiltered,
+    amounts: values.filter(el=>el!==0)
+  }
+
   const totalSpend = spendDataForSelectedMonth.reduce(
     (acc, val) => acc + val.amount,
     0
@@ -61,7 +68,8 @@ const BudgetGraph = props => {
   const graphData = {
     datasets: [
       {
-        data: amountsPerCat,
+        data: amountsPerCat.amounts,
+        legend:{labels:{display: false}},
         // extra colors for user generated categories
         backgroundColor: [
           "#3e95cd",
@@ -74,10 +82,10 @@ const BudgetGraph = props => {
           "#c45850",
           "#e803b9",
           "#c45800"
-        ]
+        ],
       }
     ],
-    labels: categories
+    labels: amountsPerCat.categories
   };
 
   // automation of months display
@@ -98,6 +106,7 @@ const BudgetGraph = props => {
   };
   const monthsToRender = getMonthsToSelect();
 
+  console.log(amountsPerCat)
   return (
     <div>
       <div className="space-around">
@@ -110,7 +119,7 @@ const BudgetGraph = props => {
           {monthsToRender}
         </Select>
       </div>
-      <Bar data={graphData} width={"100vw"} height={"50vh"}></Bar>
+      <HorizontalBar data={graphData}></HorizontalBar>
       <p>
         Total Spend for {monthStr}: {totalSpend} EUR
       </p>

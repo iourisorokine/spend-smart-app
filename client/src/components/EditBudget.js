@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Link, Redirect } from "react-router-dom";
+import AddBudgetParticipants from './AddBudgetParticipants';
 import {
   FormGroup,
   FormControl,
@@ -14,6 +15,8 @@ import axios from "axios";
 const EditBudget = props => {
     const { classes } = props;
     const [budgetName, setBudgetName] = useState(props.data.name);
+    const [addParticipants, setAddParticipants] = useState(false);
+    const [participants, setParticipants] = useState([]);
     const [budgetDescription, setBudgetDescription] = useState(props.data.description);
   
     const handleChange = e => {
@@ -58,6 +61,19 @@ const EditBudget = props => {
               <InputLabel htmlFor="budgetDescription">Description:</InputLabel>
               <Input name="budgetDescription" defaultValue={props.data.description} type="text" onChange={handleChange} />
             </FormControl>
+            {addParticipants ? (
+            <AddBudgetParticipants
+              setAddParticipants={setAddParticipants}
+              participants={participants}
+              setParticipants={setParticipants}
+            />
+          ) : (
+            <Button
+              className={classes.buttonBlueGrad}
+              onClick={() => setAddParticipants(true)}>
+              Add Participants
+            </Button>
+          )}
               <Button className={classes.buttonBlueGrad} type="submit">
                 Save changes
               </Button>

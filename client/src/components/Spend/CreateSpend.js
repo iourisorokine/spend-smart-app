@@ -8,7 +8,7 @@ import {
   Button,
   TextField
 } from "@material-ui/core";
-import { styles } from "../styles/GlobalMUIStyles";
+import { styles } from "../../styles/GlobalMUIStyles";
 import axios from "axios";
 import moment from 'moment';
 

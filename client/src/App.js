@@ -1,14 +1,14 @@
 import React from "react";
 import './App.css';
 import { Route} from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import EditSpend from "./components/EditSpend";
-import CreateBudget from "./components/CreateBudget";
-import BudgetDetails from "./components/BudgetDetails";
-import EditBudget from './components/EditBudget';
+import Navbar from "./components/Global/Navbar";
+import Home from "./components/Global/Home";
+import Login from "./components/Global/Login";
+import Signup from "./components/Global/Signup";
+import EditSpend from "./components/Spend/EditSpend";
+import CreateBudget from "./components/Budget/CreateBudget";
+import BudgetDetails from "./components/Budget/BudgetDetails";
+import EditBudget from './components/Budget/EditBudget';
 
 class App extends React.Component {
   state = {

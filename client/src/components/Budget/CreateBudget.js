@@ -8,7 +8,7 @@ import {
   Input,
   Button
 } from "@material-ui/core";
-import { styles } from "../styles/GlobalMUIStyles";
+import { styles } from "../../styles/GlobalMUIStyles";
 import AddBudgetParticipants from "./AddBudgetParticipants";
 import axios from "axios";
 

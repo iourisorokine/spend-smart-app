@@ -7,8 +7,8 @@ import {
   Input,
   Button
 } from "@material-ui/core";
-import { login } from "../services/api";
-import {styles} from "../styles/GlobalMUIStyles"
+import { login } from "../../services/api";
+import {styles} from "../../styles/GlobalMUIStyles"
 
 const Login = props => {
 

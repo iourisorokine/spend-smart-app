@@ -4,7 +4,7 @@ import BudgetLine from "./BudgetLine";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
-import { styles } from "../styles/GlobalMUIStyles";
+import { styles } from "../../styles/GlobalMUIStyles";
 import { CircleSpinner } from "react-spinners-kit";
 
 const BudgetsList = props => {

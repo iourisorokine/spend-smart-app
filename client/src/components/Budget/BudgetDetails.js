@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import SpendLine from "./SpendLine";
-import CreateSpend from "./CreateSpend";
+import SpendLine from "../Spend/SpendLine";
+import CreateSpend from "../Spend/CreateSpend";
 import BudgetGraph from "./BudgetGraph";
 import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
-import { styles } from "../styles/GlobalMUIStyles";
+import { styles } from "../../styles/GlobalMUIStyles";
 import BudgetTopMenu from "./BudgetTopMenu";
 import EditBudget from "./EditBudget";
 import { CircleSpinner } from "react-spinners-kit";

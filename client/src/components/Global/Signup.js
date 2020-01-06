@@ -8,7 +8,7 @@ import {
   FormHelperText,
   Button
 } from "@material-ui/core";
-import { signup } from "../services/api";
+import { signup } from "../../services/api";
 
 const styles = {
     root: {
